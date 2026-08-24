@@ -36,7 +36,7 @@ export function SiteFooter() {
           <nav key={group.heading} aria-labelledby={`footer-${group.heading}`}>
             <h2
               id={`footer-${group.heading}`}
-              className="text-sm font-semibold text-inverse-foreground"
+              className="font-sans text-sm font-semibold text-inverse-foreground"
             >
               {group.heading}
             </h2>
