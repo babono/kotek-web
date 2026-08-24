@@ -34,8 +34,11 @@ export function Hero() {
           </div>
         </Reveal>
 
-        <Reveal delay={320} className="relative mx-auto mt-14 max-w-5xl md:mt-20">
-          <figure>
+        <Reveal
+          delay={320}
+          className="relative mx-auto mt-14 max-w-5xl md:mt-20"
+        >
+          {/* <figure>
             <div className="overflow-hidden rounded-3xl shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
               <div className="relative aspect-video overflow-hidden">
                 <OverlayMockup />
@@ -48,6 +51,27 @@ export function Hero() {
                     <PlayIcon className="ml-1 size-7 md:size-8" />
                   </span>
                 </button>
+              </div>
+            </div>
+            <figcaption className="mt-4 text-center text-sm text-subtle-foreground">
+              {hero.demoCaption}
+            </figcaption>
+          </figure> */}
+          <figure>
+            <div className="overflow-hidden rounded-3xl shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
+              <div className="relative aspect-video overflow-hidden">
+                <video
+                  src={hero.demoVideoUrl}
+                  autoPlay
+                  autoFocus
+                  loop
+                  muted
+                  disablePictureInPicture
+                  preload="metadata"
+                  className="w-full aspect-video object-cover"
+                >
+                  Your browser does not support the video tag.
+                </video>
               </div>
             </div>
             <figcaption className="mt-4 text-center text-sm text-subtle-foreground">

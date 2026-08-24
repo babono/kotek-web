@@ -2,6 +2,7 @@
  * All landing page copy lives here so wording changes never require touching
  * a component. Sections import only the slice they render.
  */
+import path from "path";
 
 export type IconName =
   | "mallet"
@@ -18,6 +19,7 @@ export const hero = {
   description:
     "Learn various kotekan patterns at your own pace, from your phone, until they feel natural to play.",
   secondaryCta: { href: "#features", label: "See how it works" },
+  demoVideoUrl: "/hero-video-compress.mp4",
   demoCaption:
     "Mount your phone above the instrument. Kotek shows you which key to strike, and listens to check that you hit it.",
 } as const;
