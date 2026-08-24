@@ -1,26 +1,194 @@
 @import "tailwindcss";
 
+/*
+ * Token hierarchy: brand -> semantic -> component.
+ * Brand tokens name the paint (sampled from resource/color-scheme.png);
+ * semantic tokens name the job. Components only ever use semantic tokens,
+ * so a palette change happens in one place.
+ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand */
+  --brand-brass: #b99526;
+  --brand-brass-soft: #d9bb62;
+  --brand-copper: #a75e1d;
+  --brand-sandalwood: #c8a989;
+  --brand-marigold: #d98a2b;
+  --brand-brick: #a6372c;
+  --brand-sage: #728868;
+  --brand-ebony: #2e2119;
+  --brand-bark: #56443b;
+  --brand-umber: #655143;
+  --brand-clay: #8c7b6e;
+  --brand-ivory: #e1d9d0;
+  --brand-canvas: #faf8f5;
+  --brand-surface: #f1ece4;
+  --brand-surface-strong: #e8e1d6;
+
+  /* Semantic */
+  --background: var(--brand-canvas);
+  --foreground: var(--brand-ebony);
+  --body: var(--brand-bark);
+  --muted-foreground: var(--brand-umber);
+  --subtle-foreground: var(--brand-clay);
+  --card: var(--brand-surface);
+  --card-strong: var(--brand-surface-strong);
+  --border: color-mix(in oklab, var(--brand-ebony) 10%, transparent);
+  --primary: var(--brand-brass);
+  --primary-hover: var(--brand-brass-soft);
+  --primary-foreground: var(--brand-ebony);
+  --accent: var(--brand-copper);
+  --accent-muted: var(--brand-sandalwood);
+  /* Inverse = the dark bands (footer, closing CTA, app mockups) */
+  --inverse: var(--brand-ebony);
+  --inverse-hover: var(--brand-bark);
+  --inverse-foreground: var(--brand-ivory);
+  --ring: var(--brand-brass);
+  --success: var(--brand-sage);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-body: var(--body);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+  --color-card: var(--card);
+  --color-card-strong: var(--card-strong);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-muted: var(--accent-muted);
+  --color-inverse: var(--inverse);
+  --color-inverse-hover: var(--inverse-hover);
+  --color-inverse-foreground: var(--inverse-foreground);
+  --color-ring: var(--ring);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+
+  --radius-card: 1.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    color-scheme: light;
+  }
+
+  /* Fallback for when Lenis is not running (no JS). Lenis adds `.lenis`. */
+  html:not(.lenis) {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--body);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    color: var(--foreground);
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* Removes the 300ms double-tap zoom delay on touch targets. */
+  a,
+  button,
+  summary {
+    touch-action: manipulation;
+  }
+
+  ::selection {
+    background-color: color-mix(in oklab, var(--primary) 30%, transparent);
+    color: var(--foreground);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/*
+ * Scroll reveals. Driven by an animation rather than a transition: the stagger
+ * needs a per-child delay, and a `transition-delay` would also delay every
+ * other transition on that element (hover colours included).
+ * See components/ui/reveal.tsx.
+ */
+@keyframes reveal-rise {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@layer components {
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 0;
+  }
+
+  /* Only promote a layer while the block is still waiting to animate. */
+  .reveal:not([data-visible="true"]),
+  .reveal-stagger:not([data-visible="true"]) > * {
+    will-change: opacity, transform;
+  }
+
+  .reveal[data-visible="true"],
+  .reveal-stagger[data-visible="true"] > * {
+    opacity: 1;
+    /*
+     * `backwards` holds the from-state through the delay, then stops applying
+     * once finished, so a settled reveal never overrides a hover transform.
+     */
+    animation: reveal-rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-stagger[data-visible="true"] > *:nth-child(2) {
+    animation-delay: calc(var(--reveal-delay, 0ms) + 90ms);
+  }
+
+  .reveal-stagger[data-visible="true"] > *:nth-child(3) {
+    animation-delay: calc(var(--reveal-delay, 0ms) + 180ms);
+  }
+
+  .reveal-stagger[data-visible="true"] > *:nth-child(4) {
+    animation-delay: calc(var(--reveal-delay, 0ms) + 270ms);
+  }
+
+  .reveal-stagger[data-visible="true"] > *:nth-child(5) {
+    animation-delay: calc(var(--reveal-delay, 0ms) + 360ms);
+  }
+
+  .reveal-stagger[data-visible="true"] > *:nth-child(6) {
+    animation-delay: calc(var(--reveal-delay, 0ms) + 450ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal-stagger > * {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
