@@ -1,268 +1,346 @@
 /**
- * The hero visual: a stylised top-down view of a gangsa as Kotek sees it
- * through the camera, with the guidance overlay drawn on top.
- * Key states follow the app's overlay tokens — idle, approaching, strike, hit.
+ * The hero visual: the Gomelan play screen as it looks on the phone — camera
+ * feed with the key overlay, the polos/sangsih controls, and the note track
+ * running under the playhead. Modelled on the app's own guidance screen.
  */
 
-const KEY_COUNT = 10;
-const KEY_WIDTH = 44;
-const KEY_GAP = 14;
-const TRACK_WIDTH = KEY_COUNT * KEY_WIDTH + (KEY_COUNT - 1) * KEY_GAP;
-const START_X = (800 - TRACK_WIDTH) / 2;
-const CENTER_Y = 232;
+/** Key outlines as the camera sees them, angled slightly by the mount. */
+const KEYS = [
+  { x: 132, y: 172, w: 84, h: 244 },
+  { x: 232, y: 166, w: 84, h: 252 },
+  { x: 332, y: 178, w: 84, h: 238 },
+  { x: 432, y: 160, w: 84, h: 258 },
+  { x: 532, y: 150, w: 88, h: 272, active: true },
+  { x: 636, y: 174, w: 84, h: 242 },
+  { x: 736, y: 186, w: 84, h: 228 },
+];
 
-type KeyState = "idle" | "approaching" | "strike" | "hit";
+/** Interlocking figure: polos on the beat, sangsih in the gaps between. */
+const TRACK_START = 96;
+const TRACK_STEP = 54;
+const ROW_Y = [402, 426, 450, 474];
 
-const STATES: Record<number, KeyState> = {
-  1: "hit",
-  3: "strike",
-  6: "approaching",
-};
+const NOTES = [
+  { slot: 0, row: 1, part: "polos", label: "5" },
+  { slot: 1, row: 2, part: "sangsih" },
+  { slot: 2, row: 0, part: "polos", label: "6" },
+  { slot: 3, row: 2, part: "sangsih" },
+  { slot: 4, row: 1, part: "polos", label: "5" },
+  { slot: 5, row: 3, part: "sangsih" },
+  { slot: 6, row: 1, part: "polos", label: "5" },
+  { slot: 7, row: 2, part: "sangsih" },
+  { slot: 8, row: 0, part: "polos", label: "6", current: true },
+  { slot: 9, row: 2, part: "sangsih" },
+  { slot: 10, row: 2, part: "polos", label: "4" },
+  { slot: 11, row: 3, part: "sangsih" },
+  { slot: 12, row: 1, part: "polos", label: "5" },
+  { slot: 13, row: 2, part: "sangsih" },
+  { slot: 14, row: 2, part: "polos", label: "4" },
+] as const;
 
-function keyGeometry(index: number) {
-  const height = 214 - index * 8;
-  return {
-    x: START_X + index * (KEY_WIDTH + KEY_GAP),
-    y: CENTER_Y - height / 2,
-    width: KEY_WIDTH,
-    height,
-  };
-}
+const PLAYHEAD_X = TRACK_START + 8 * TRACK_STEP + 22;
 
 export function OverlayMockup() {
   return (
     <svg
-      viewBox="0 0 800 450"
+      viewBox="0 0 960 540"
       className="h-full w-full"
       role="img"
-      aria-label="Kotek's camera view of a gangsa, with the next key to strike highlighted and an approach track along the bottom of the screen."
+      aria-label="The Gomelan play screen: a camera view of a gangsa with the next key outlined in cream, a polos and sangsih toggle, and a track of interlocking blue and purple notes running under the playhead."
     >
       <defs>
         <linearGradient id="feed" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3a2b21" />
-          <stop offset="100%" stopColor="#241a13" />
+          <stop offset="0%" stopColor="#12100a" />
+          <stop offset="100%" stopColor="#080702" />
         </linearGradient>
-        <linearGradient id="bronze" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#7d6129" />
-          <stop offset="55%" stopColor="#634b20" />
-          <stop offset="100%" stopColor="#4b3919" />
-        </linearGradient>
-        <linearGradient id="strikeFill" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#e8c86a" />
-          <stop offset="100%" stopColor="#b99526" />
-        </linearGradient>
-        <filter id="strikeGlow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="9" result="blur" />
+        <radialGradient id="keyGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#f6e3ac" stopOpacity="0.22" />
+          <stop offset="100%" stopColor="#f6e3ac" stopOpacity="0.04" />
+        </radialGradient>
+        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="6" result="b" />
           <feMerge>
-            <feMergeNode in="blur" />
+            <feMergeNode in="b" />
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
 
-      {/* camera feed */}
-      <rect width="800" height="450" fill="url(#feed)" />
+      {/* live camera feed */}
+      <rect width="960" height="540" fill="url(#feed)" />
 
-      {/* instrument frame */}
-      <rect
-        x={START_X - 34}
-        y={72}
-        width={TRACK_WIDTH + 68}
-        height={320}
-        rx={22}
-        fill="#4a3527"
-      />
-      <rect
-        x={START_X - 20}
-        y={86}
-        width={TRACK_WIDTH + 40}
-        height={292}
-        rx={16}
-        fill="#332419"
-      />
-
-      {/* bronze keys with their overlay state */}
-      {Array.from({ length: KEY_COUNT }, (_, i) => {
-        const { x, y, width, height } = keyGeometry(i);
-        const state = STATES[i] ?? "idle";
-        const stroke =
-          state === "hit"
-            ? "#a8c39a"
-            : state === "strike"
-              ? "#f0d685"
-              : "#c8a989";
-        const strokeWidth = state === "idle" ? 1.5 : 3;
-        const strokeOpacity = state === "idle" ? 0.3 : 1;
-        // "approaching" fills from the bottom up as the note gets closer
-        const fillHeight = state === "approaching" ? height * 0.55 : 0;
-
-        return (
-          <g key={i}>
+      {/* the gangsa keys, outlined where the app has mapped them */}
+      {KEYS.map((key, i) => (
+        <g key={i}>
+          {key.active ? (
+            <>
+              <rect
+                x={key.x}
+                y={key.y}
+                width={key.w}
+                height={key.h}
+                rx={16}
+                fill="url(#keyGlow)"
+              />
+              <rect
+                x={key.x}
+                y={key.y}
+                width={key.w}
+                height={key.h}
+                rx={16}
+                fill="none"
+                stroke="#f6e3ac"
+                strokeWidth={3}
+                filter="url(#glow)"
+              />
+            </>
+          ) : (
             <rect
-              x={x}
-              y={y}
-              width={width}
-              height={height}
-              rx={9}
-              fill="url(#bronze)"
-            />
-            {state === "strike" ? (
-              <rect
-                x={x}
-                y={y}
-                width={width}
-                height={height}
-                rx={9}
-                fill="url(#strikeFill)"
-                filter="url(#strikeGlow)"
-              />
-            ) : null}
-            {fillHeight > 0 ? (
-              <rect
-                x={x}
-                y={y + height - fillHeight}
-                width={width}
-                height={fillHeight}
-                rx={9}
-                fill="#b99526"
-                opacity={0.6}
-              />
-            ) : null}
-            {state === "hit" ? (
-              <rect
-                x={x}
-                y={y}
-                width={width}
-                height={height}
-                rx={9}
-                fill="#728868"
-                opacity={0.6}
-              />
-            ) : null}
-            <rect
-              x={x}
-              y={y}
-              width={width}
-              height={height}
-              rx={9}
+              x={key.x}
+              y={key.y}
+              width={key.w}
+              height={key.h}
+              rx={16}
               fill="none"
-              stroke={stroke}
-              strokeWidth={strokeWidth}
-              strokeOpacity={strokeOpacity}
+              stroke="#c9a063"
+              strokeWidth={1.5}
+              strokeOpacity={0.42}
             />
+          )}
+        </g>
+      ))}
+
+      {/* top bar */}
+      <rect width="960" height="54" fill="#302822" />
+      <rect y="53" width="960" height="1" fill="#c9a063" fillOpacity="0.18" />
+      <text
+        x="28"
+        y="34"
+        fill="#c9a063"
+        fontSize="15"
+        fontWeight="600"
+        letterSpacing="2.6"
+        fontFamily="var(--font-sans)"
+      >
+        NGECOG
+      </text>
+      <text
+        x="480"
+        y="34"
+        fill="#d9b896"
+        fillOpacity="0.8"
+        fontSize="15"
+        textAnchor="middle"
+        fontFamily="var(--font-sans)"
+      >
+        Cycle 2 · 86%
+      </text>
+      <rect x="832" y="12" width="42" height="30" rx="15" fill="#c9a063" />
+      <rect x="845" y="21" width="16" height="12" rx="3" fill="#302822" />
+      <rect
+        x="886"
+        y="12"
+        width="42"
+        height="30"
+        rx="10"
+        fill="none"
+        stroke="#c9a063"
+        strokeOpacity="0.55"
+      />
+      <rect x="900" y="20" width="4" height="14" rx="1.5" fill="#c9a063" />
+      <rect x="910" y="20" width="4" height="14" rx="1.5" fill="#c9a063" />
+
+      {/* translucent control panel over the lower half of the feed */}
+      <rect y="318" width="960" height="222" fill="#2a221b" fillOpacity="0.9" />
+
+      {/* role toggle */}
+      <rect
+        x="96"
+        y="336"
+        width="196"
+        height="40"
+        rx="20"
+        fill="none"
+        stroke="#c9a063"
+        strokeOpacity="0.4"
+      />
+      <rect x="100" y="340" width="94" height="32" rx="16" fill="#c9a063" />
+      <text
+        x="147"
+        y="361"
+        fill="#2a221b"
+        fontSize="13"
+        fontWeight="700"
+        letterSpacing="1.4"
+        textAnchor="middle"
+        fontFamily="var(--font-sans)"
+      >
+        POLOS
+      </text>
+      <text
+        x="243"
+        y="361"
+        fill="#d9b896"
+        fillOpacity="0.75"
+        fontSize="13"
+        fontWeight="600"
+        letterSpacing="1.4"
+        textAnchor="middle"
+        fontFamily="var(--font-sans)"
+      >
+        SANGSIH
+      </text>
+
+      {/* tempo */}
+      <rect
+        x="306"
+        y="336"
+        width="74"
+        height="40"
+        rx="20"
+        fill="none"
+        stroke="#c9a063"
+        strokeOpacity="0.4"
+      />
+      <text
+        x="343"
+        y="361"
+        fill="#d9b896"
+        fontSize="13"
+        fontWeight="600"
+        textAnchor="middle"
+        fontFamily="var(--font-sans)"
+      >
+        1×
+      </text>
+
+      {/* legend */}
+      <rect
+        x="628"
+        y="336"
+        width="150"
+        height="40"
+        rx="20"
+        fill="none"
+        stroke="#c9a063"
+        strokeOpacity="0.3"
+      />
+      <rect x="646" y="348" width="18" height="16" rx="4" fill="#5fa8d3" />
+      <text
+        x="674"
+        y="361"
+        fill="#e8dcc4"
+        fontSize="13"
+        fontWeight="600"
+        fontFamily="var(--font-sans)"
+      >
+        Polos · you
+      </text>
+      <rect
+        x="790"
+        y="336"
+        width="128"
+        height="40"
+        rx="20"
+        fill="none"
+        stroke="#c9a063"
+        strokeOpacity="0.3"
+      />
+      <rect
+        x="808"
+        y="348"
+        width="18"
+        height="16"
+        rx="4"
+        fill="none"
+        stroke="#a97cd1"
+        strokeWidth="2"
+      />
+      <text
+        x="836"
+        y="361"
+        fill="#e8dcc4"
+        fillOpacity="0.8"
+        fontSize="13"
+        fontWeight="600"
+        fontFamily="var(--font-sans)"
+      >
+        Sangsih
+      </text>
+
+      {/* note track */}
+      <rect x="96" y="392" width="824" height="1" fill="#c9a063" fillOpacity="0.16" />
+      {NOTES.map((note) => {
+        const x = TRACK_START + note.slot * TRACK_STEP;
+        const y = ROW_Y[note.row];
+        const isPolos = note.part === "polos";
+        return (
+          <g key={note.slot}>
+            <rect
+              x={x}
+              y={y}
+              width={44}
+              height={20}
+              rx={5}
+              fill={isPolos ? "#5fa8d3" : "#a97cd1"}
+              fillOpacity={"current" in note && note.current ? 1 : 0.9}
+            />
+            {"current" in note && note.current ? (
+              <rect
+                x={x - 3}
+                y={y - 3}
+                width={50}
+                height={26}
+                rx={7}
+                fill="none"
+                stroke="#f6e3ac"
+                strokeWidth={2}
+              />
+            ) : null}
+            {"label" in note && note.label ? (
+              <text
+                x={x + 22}
+                y={y + 15}
+                fill="#12100a"
+                fontSize="12"
+                fontWeight="700"
+                textAnchor="middle"
+                fontFamily="var(--font-sans)"
+              >
+                {note.label}
+              </text>
+            ) : null}
           </g>
         );
       })}
 
-      {/* "strike now" callout above the active key */}
-      {(() => {
-        const { x, y, width } = keyGeometry(3);
+      {/* playhead */}
+      <rect
+        x={PLAYHEAD_X}
+        y="386"
+        width="2"
+        height="122"
+        fill="#f6e3ac"
+        fillOpacity="0.9"
+      />
+
+      {/* beat markers */}
+      {Array.from({ length: 15 }, (_, i) => {
+        const cx = TRACK_START + i * TRACK_STEP + 22;
+        const onBeat = i === 8;
         return (
-          <g>
-            <rect
-              x={x + width / 2 - 46}
-              y={y - 46}
-              width={92}
-              height={30}
-              rx={15}
-              fill="#e8c86a"
-            />
-            <text
-              x={x + width / 2}
-              y={y - 26}
-              textAnchor="middle"
-              fontSize="14"
-              fontWeight="700"
-              fill="#2e2119"
-              fontFamily="var(--font-display), sans-serif"
-            >
-              Strike
-            </text>
-          </g>
+          <circle
+            key={i}
+            cx={cx}
+            cy={518}
+            r={onBeat ? 6 : 4}
+            fill={onBeat ? "#c9a063" : "none"}
+            stroke="#c9a063"
+            strokeOpacity={onBeat ? 1 : 0.4}
+            strokeWidth={1.5}
+          />
         );
-      })()}
-
-      {/* HUD — mode chip and running accuracy */}
-      <g>
-        <rect
-          x="34"
-          y="30"
-          width="140"
-          height="34"
-          rx="17"
-          fill="#2e2119"
-          opacity="0.75"
-        />
-        <circle cx="54" cy="47" r="5" fill="#b99526" />
-        <text
-          x="68"
-          y="52"
-          fontSize="14"
-          fill="#e1d9d0"
-          fontFamily="var(--font-sans), sans-serif"
-        >
-          Sangsih · 80 bpm
-        </text>
-      </g>
-      <g>
-        <rect
-          x="638"
-          y="30"
-          width="128"
-          height="34"
-          rx="17"
-          fill="#2e2119"
-          opacity="0.75"
-        />
-        <text
-          x="658"
-          y="52"
-          fontSize="14"
-          fill="#8fae82"
-          fontFamily="var(--font-sans), sans-serif"
-        >
-          Perfect ×12
-        </text>
-      </g>
-
-      {/* approach track along the bottom edge */}
-      <rect
-        x="34"
-        y="404"
-        width="732"
-        height="18"
-        rx="9"
-        fill="#2e2119"
-        opacity="0.7"
-      />
-      <rect
-        x="34"
-        y="404"
-        width="256"
-        height="18"
-        rx="9"
-        fill="#b99526"
-        opacity="0.35"
-      />
-      {[290, 356, 422, 488, 554, 620, 686].map((cx, i) => (
-        <circle
-          key={cx}
-          cx={cx}
-          cy={413}
-          r={i === 0 ? 8 : 5.5}
-          fill={i === 0 ? "#e8c86a" : "#c8a989"}
-          opacity={i === 0 ? 1 : 0.5 - i * 0.05}
-        />
-      ))}
-      <rect
-        x="286"
-        y="396"
-        width="3"
-        height="34"
-        rx="1.5"
-        fill="#e1d9d0"
-        opacity="0.85"
-      />
+      })}
     </svg>
   );
 }

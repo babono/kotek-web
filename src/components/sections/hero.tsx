@@ -1,9 +1,7 @@
-import { PlayIcon } from "@/components/icons/play";
 import { AppStoreButton } from "@/components/ui/app-store-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { Reveal } from "@/components/ui/reveal";
-import { OverlayMockup } from "@/components/mockups/overlay-mockup";
 import { hero } from "@/content/landing";
 
 export function Hero() {
@@ -38,37 +36,20 @@ export function Hero() {
           delay={320}
           className="relative mx-auto mt-14 max-w-5xl md:mt-20"
         >
-          {/* <figure>
-            <div className="overflow-hidden rounded-3xl shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
-              <div className="relative aspect-video overflow-hidden">
-                <OverlayMockup />
-                <button
-                  type="button"
-                  aria-label="Play the demo video"
-                  className="group absolute inset-0 flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
-                >
-                  <span className="flex size-16 items-center justify-center rounded-full bg-inverse-foreground/95 text-foreground shadow-lg transition-transform group-hover:scale-105 md:size-20">
-                    <PlayIcon className="ml-1 size-7 md:size-8" />
-                  </span>
-                </button>
-              </div>
-            </div>
-            <figcaption className="mt-4 text-center text-sm text-subtle-foreground">
-              {hero.demoCaption}
-            </figcaption>
-          </figure> */}
           <figure>
-            <div className="overflow-hidden rounded-3xl shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
+            <div className="overflow-hidden rounded-lg shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
               <div className="relative aspect-video overflow-hidden">
                 <video
                   src={hero.demoVideoUrl}
                   autoPlay
-                  autoFocus
                   loop
                   muted
+                  // iOS Safari refuses inline autoplay without this and
+                  // takes the video fullscreen instead.
+                  playsInline
                   disablePictureInPicture
                   preload="metadata"
-                  className="w-full aspect-video object-cover"
+                  className="aspect-video w-full object-cover"
                 >
                   Your browser does not support the video tag.
                 </video>

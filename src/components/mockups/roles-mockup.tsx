@@ -1,51 +1,73 @@
 import { Panel } from "@/components/mockups/panel";
+import { cn } from "@/lib/utils";
 
-/** polos on the off-beats, sangsih on the on-beats: the interlock, drawn out. */
+/**
+ * The in-play role controls: pick polos or sangsih, and the app takes the
+ * other half. Polos lands on the beat, sangsih falls in the gaps it leaves.
+ */
 const POLOS = [1, 0, 1, 0, 1, 1, 0, 1];
 const SANGSIH = [0, 1, 0, 1, 0, 0, 1, 0];
 
 const PARTS = [
-  { label: "You", row: SANGSIH, active: true },
-  { label: "Kotek", row: POLOS, active: false },
+  { label: "Polos · you", row: POLOS, mine: true },
+  { label: "Sangsih", row: SANGSIH, mine: false },
 ];
 
 export function RolesMockup() {
   return (
-    <Panel label="A role picker set to Sangsih, with the interlocking polos and sangsih parts shown as two rows of beats.">
-      <p className="mb-4 text-xs font-medium tracking-wider text-subtle-foreground uppercase">
-        Your role
-      </p>
-      <div className="mb-5 grid grid-cols-2 gap-2 rounded-full bg-inverse-foreground/5 p-1">
-        <span className="rounded-full px-4 py-2 text-center text-sm text-subtle-foreground">
-          Polos
-        </span>
-        <span className="rounded-full bg-primary px-4 py-2 text-center text-sm font-semibold text-primary-foreground">
-          Sangsih
+    <Panel label="The app's role controls: a Polos and Sangsih toggle set to Polos, with the two interlocking parts shown as rows of blue and purple notes.">
+      {/* control strip, as it sits over the camera feed */}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="flex rounded-full border border-app-brass/40 p-1">
+          <span className="rounded-full bg-app-brass px-4 py-1.5 text-xs font-bold tracking-widest text-app-bar">
+            POLOS
+          </span>
+          <span className="px-4 py-1.5 text-xs font-semibold tracking-widest text-app-tan/70">
+            SANGSIH
+          </span>
+        </div>
+        <span className="rounded-full border border-app-brass/40 px-3.5 py-1.5 text-xs font-semibold text-app-tan">
+          1×
         </span>
       </div>
-      <div className="flex flex-col gap-3">
+
+      {/* the interlock, drawn out */}
+      <div className="mt-5 flex flex-col gap-3">
         {PARTS.map((part) => (
           <div key={part.label} className="flex items-center gap-3">
-            <span className="w-12 shrink-0 text-xs text-subtle-foreground">
+            <span className="flex w-24 shrink-0 items-center gap-1.5 text-[0.65rem] text-app-tan/70">
+              <span
+                className={cn(
+                  "size-2.5 rounded-[3px]",
+                  part.mine
+                    ? "bg-app-polos"
+                    : "border-2 border-app-sangsih bg-transparent",
+                )}
+              />
               {part.label}
             </span>
             <span className="flex min-w-0 flex-1 gap-1.5">
               {part.row.map((beat, i) => (
                 <span
                   key={i}
-                  className={`h-8 flex-1 rounded-md ${
-                    beat === 1
-                      ? part.active
-                        ? "bg-primary"
-                        : "bg-accent-muted/60"
-                      : "bg-inverse-foreground/8"
-                  }`}
+                  className={cn(
+                    "h-7 flex-1 rounded-[4px]",
+                    beat === 0
+                      ? "bg-app-cream/5"
+                      : part.mine
+                        ? "bg-app-polos"
+                        : "bg-app-sangsih",
+                  )}
                 />
               ))}
             </span>
           </div>
         ))}
       </div>
+
+      <p className="mt-4 text-[0.65rem] text-app-tan/50">
+        Polos on the beat, sangsih between. Take a half; the app plays the other.
+      </p>
     </Panel>
   );
 }

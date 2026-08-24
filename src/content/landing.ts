@@ -2,8 +2,6 @@
  * All landing page copy lives here so wording changes never require touching
  * a component. Sections import only the slice they render.
  */
-import path from "path";
-
 export type IconName =
   | "mallet"
   | "users"

@@ -39,9 +39,14 @@ export function ButtonLink({
   className,
   children,
 }: ButtonLinkProps) {
+  const isExternal = /^https?:/.test(href);
+
   return (
     <Link
       href={href}
+      // Keep the landing page open when handing off to another site.
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className={cn(buttonVariants({ variant, size }), className)}
     >
       {children}

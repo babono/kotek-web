@@ -24,6 +24,21 @@
   --brand-surface: #f1ece4;
   --brand-surface-strong: #e8e1d6;
 
+  /*
+   * In-app UI palette, sampled from the Gomelan app screenshots.
+   * Used only by the product mockups so they read as the real thing.
+   */
+  --app-bg: #3d322c;
+  --app-panel: #2d231e;
+  --app-bar: #302822;
+  --app-feed: #0c0b02;
+  --app-brass: #c9a063;
+  --app-tan: #d9b896;
+  --app-cream: #f6e3ac;
+  --app-polos: #5fa8d3;
+  --app-sangsih: #a97cd1;
+  --app-miss: #a25842;
+
   /* Semantic */
   --background: var(--brand-canvas);
   --foreground: var(--brand-ebony);
@@ -66,8 +81,21 @@
   --color-ring: var(--ring);
   --color-success: var(--success);
 
+  --color-app-bg: var(--app-bg);
+  --color-app-panel: var(--app-panel);
+  --color-app-bar: var(--app-bar);
+  --color-app-feed: var(--app-feed);
+  --color-app-brass: var(--app-brass);
+  --color-app-tan: var(--app-tan);
+  --color-app-cream: var(--app-cream);
+  --color-app-polos: var(--app-polos);
+  --color-app-sangsih: var(--app-sangsih);
+  --color-app-miss: var(--app-miss);
+
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  /* Headings and the wordmark use the app's own display face. */
+  --font-display: var(--font-dream-orphans), ui-serif, Georgia, serif;
+  --font-serif: var(--font-dream-orphans), ui-serif, Georgia, serif;
 
   --radius-card: 1.25rem;
 }
@@ -94,7 +122,20 @@
   h3,
   h4 {
     color: var(--foreground);
+  }
+
+  /* Display tier only — the serif is drawn for size. */
+  h1,
+  h2 {
     font-family: var(--font-display);
+    /* The serif carries its own fitting; tight tracking suited the sans. */
+    letter-spacing: -0.005em;
+  }
+
+  /* Card and sub-headings stay on the sans, which sets more cleanly small. */
+  h3,
+  h4 {
+    font-family: var(--font-sans);
     letter-spacing: -0.02em;
   }
 

@@ -3,8 +3,8 @@ export const siteConfig = {
   tagline: "Learn to play gamelan on your phone",
   description:
     "Kotek turns your phone into a kotekan practice partner. Point it at a real gangsa and get real-time guidance on which key to strike and when. No instructor or second player required.",
-  /** Swap for the real listing once the app ships. */
-  appStoreUrl: "#download",
+  /** TestFlight beta. Swap for the App Store listing once the app ships. */
+  appStoreUrl: "https://testflight.apple.com/join/AzSMs356",
   email: "hello@kotek.app",
   url: "https://kotek.app",
 } as const;
