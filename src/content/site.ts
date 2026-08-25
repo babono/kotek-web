@@ -10,24 +10,26 @@ export const siteConfig = {
 } as const;
 
 export const navLinks = [
-  { href: "#features", label: "Features" },
-  { href: "#community", label: "Community" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#features", label: "Features" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/feedback", label: "Feedback" },
 ] as const;
 
 export const footerGroups = [
   {
     heading: "Product",
     links: [
-      { href: "#features", label: "Features" },
-      { href: "#faq", label: "FAQ" },
-      { href: "#download", label: "Download" },
+      { href: "/#features", label: "Features" },
+      { href: "/#faq", label: "FAQ" },
+      { href: "/#download", label: "Download" },
     ],
   },
   {
     heading: "Community",
     links: [
-      { href: "#community", label: "Who it’s for" },
+      { href: "/#community", label: "Who it’s for" },
+      { href: "/feedback", label: "Feedback wall" },
+      { href: "/spin", label: "Prize wheel" },
       { href: `mailto:${siteConfig.email}`, label: "Contact us" },
     ],
   },

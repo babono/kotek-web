@@ -126,6 +126,12 @@ export const benefits = {
   cards: readonly { icon: IconName; title: string; body: string }[];
 };
 
+export const feedback = {
+  title: "Your feedback is valuable to our team",
+  description:
+    "Tell us what would make practice easier, what confused you, or what you want to play next. Every note lands on the board.",
+} as const;
+
 export const closingCta = {
   title: "Make your learning interactive and fun",
   description: "Start your learning journey with Kotek.",

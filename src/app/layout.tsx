@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Figtree } from "next/font/google";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SkipLink } from "@/components/layout/skip-link";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
@@ -76,7 +79,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <style>{`.reveal,.reveal-stagger>*{opacity:1!important;transform:none!important}`}</style>
         </noscript>
         <SmoothScroll />
-        {children}
+        <SkipLink />
+        <SiteHeader />
+        <main id="main" className="flex-1">
+          {children}
+        </main>
+        <SiteFooter />
       </body>
     </html>
   );
