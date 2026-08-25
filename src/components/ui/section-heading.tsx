@@ -7,11 +7,14 @@ export function SectionHeading({
   description,
   eyebrow,
   align = "center",
+  as: Heading = "h2",
 }: {
   title: React.ReactNode;
   description?: React.ReactNode;
   eyebrow?: string;
   align?: "center" | "left";
+  /** Use "h1" when the section is a page's main heading. */
+  as?: "h1" | "h2";
 }) {
   return (
     <Reveal
@@ -24,9 +27,9 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <h2 className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+      <Heading className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
         {title}
-      </h2>
+      </Heading>
       {description ? (
         <p className="text-base text-muted-foreground text-pretty sm:text-lg">
           {description}

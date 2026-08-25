@@ -59,6 +59,7 @@
   --inverse-foreground: var(--brand-ivory);
   --ring: var(--brand-brass);
   --success: var(--brand-sage);
+  --destructive: var(--brand-brick);
 }
 
 @theme inline {
@@ -80,6 +81,7 @@
   --color-inverse-foreground: var(--inverse-foreground);
   --color-ring: var(--ring);
   --color-success: var(--success);
+  --color-destructive: var(--destructive);
 
   --color-app-bg: var(--app-bg);
   --color-app-panel: var(--app-panel);
@@ -211,6 +213,35 @@
   .reveal-stagger[data-visible="true"] > *:nth-child(6) {
     animation-delay: calc(var(--reveal-delay, 0ms) + 450ms);
   }
+}
+
+/* Entry animation for the prize dialog; it only exists while [open]. */
+@keyframes prize-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes prize-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.prize-dialog[open] {
+  animation: prize-pop 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.prize-dialog[open]::backdrop {
+  animation: prize-backdrop 0.28s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
