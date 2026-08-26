@@ -4,6 +4,7 @@ import { ClosingCta } from "@/components/sections/closing-cta";
 import { FaqSection } from "@/components/sections/faq";
 import { FeaturesSection } from "@/components/sections/features";
 import { Hero } from "@/components/sections/hero";
+import { MekarBhuanaSection } from "@/components/sections/mekar-bhuana";
 import { ProblemSection } from "@/components/sections/problem";
 
 export default function HomePage() {
@@ -12,6 +13,7 @@ export default function HomePage() {
       <Hero />
       <ProblemSection />
       <AudienceSection />
+      <MekarBhuanaSection />
       <FeaturesSection />
       <BenefitsSection />
       <FaqSection />
@@ -19,3 +21,4 @@ export default function HomePage() {
     </>
   );
 }
+

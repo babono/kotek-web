@@ -16,9 +16,9 @@ export function AppStoreButton({
       <AppleIcon className="size-5 shrink-0" />
       <span className="flex flex-col items-start leading-none">
         <span className="text-[0.65rem] font-normal opacity-70">
-          Download on the
+          Try on
         </span>
-        <span className="mt-0.5 text-[0.95rem]">App Store</span>
+        <span className="mt-0.5 text-[0.95rem]">TestFlight</span>
       </span>
     </ButtonLink>
   );

@@ -244,6 +244,23 @@
   animation: prize-backdrop 0.28s ease-out;
 }
 
+@keyframes scan {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  85% {
+    opacity: 0.8;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

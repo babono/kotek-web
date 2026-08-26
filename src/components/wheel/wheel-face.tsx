@@ -15,9 +15,9 @@ const HEAD_R = 17;
 const TIP_Y = 72;
 
 const TONE_FILL = {
-  sticker: "#c8a989",
-  candy: "#8fa382",
-  keychain: "#b99526",
+  sticker: "#5fa8d3",
+  candy: "#a97cd1",
+  keychain: "#fddc8a",
 } as const;
 
 /** Degrees are measured clockwise from 12 o'clock, matching the pointer. */

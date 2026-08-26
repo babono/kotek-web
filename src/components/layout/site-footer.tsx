@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AppleIcon } from "@/components/icons/apple";
 import { Container } from "@/components/ui/container";
 import { footerGroups, siteConfig } from "@/content/site";
 
@@ -27,7 +28,7 @@ export function SiteFooter() {
             </span>
           </Link>
           <p className="max-w-xs text-sm leading-relaxed">
-            Learn to play gamelan on your phone, before there&rsquo;s a teacher
+            Practice real gamelan with an interactive partner, before there&rsquo;s a teacher
             or a sekaa to join.
           </p>
         </div>
@@ -62,7 +63,14 @@ export function SiteFooter() {
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
             reserved.
           </p>
-          <p>Made in Bali for the gamelan community.</p>
+          <p className="flex items-center gap-1.5 flex-wrap">
+            <span>Made in</span>
+            <span className="inline-flex items-center gap-1 text-inverse-foreground">
+              <AppleIcon className="size-3.5" />
+              <span>Apple Developer Academy Bali</span>
+            </span>
+            <span>for the gamelan community.</span>
+          </p>
         </Container>
       </div>
     </footer>
