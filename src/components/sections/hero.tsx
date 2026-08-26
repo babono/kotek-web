@@ -1,6 +1,7 @@
 import { AppStoreButton } from "@/components/ui/app-store-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { HitDetectionShowcase } from "@/components/ui/hit-detection-showcase";
 import { Reveal } from "@/components/ui/reveal";
 import { hero } from "@/content/landing";
 
@@ -59,6 +60,9 @@ export function Hero() {
               {hero.demoCaption}
             </figcaption>
           </figure>
+
+          {/* Hit Detection Dual-Engine Showcase */}
+          <HitDetectionShowcase />
         </Reveal>
       </Container>
     </section>

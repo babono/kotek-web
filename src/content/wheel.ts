@@ -55,7 +55,7 @@ export const wheelSlices: WheelSlice[] = [
 
 export const wheelCopy = {
   eyebrow: "Prize wheel",
-  title: "Spin to win something small",
+  title: "Spin to win prize",
   description:
     "Come and find us at the booth, give the wheel a spin, and take home a little piece of Kotek.",
 } as const;
