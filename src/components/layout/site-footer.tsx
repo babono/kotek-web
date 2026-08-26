@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { AppleIcon } from "@/components/icons/apple";
+import { KotekSanskrit } from "@/components/icons/kotek-sanskrit";
 import { Container } from "@/components/ui/container";
 import { footerGroups, siteConfig } from "@/content/site";
 
@@ -26,6 +27,7 @@ export function SiteFooter() {
             >
               {siteConfig.name}
             </span>
+            <KotekSanskrit className="h-4.5 w-auto text-inverse-foreground" />
           </Link>
           <p className="max-w-xs text-sm leading-relaxed">
             Practice real gamelan with an interactive partner, before there&rsquo;s a teacher
@@ -64,7 +66,7 @@ export function SiteFooter() {
             reserved.
           </p>
           <p className="flex items-center gap-1.5 flex-wrap">
-            <span>Made in</span>
+            <span>Built at</span>
             <span className="inline-flex items-center gap-1 text-inverse-foreground">
               <AppleIcon className="size-3.5" />
               <span>Apple Developer Academy Bali</span>
