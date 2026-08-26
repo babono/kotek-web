@@ -262,7 +262,7 @@ export function PrizeWheel() {
           if (event.key === " " || event.key === "Enter") release();
         }}
         className={cn(
-          buttonVariants({ variant: "solid" }),
+          buttonVariants({ variant: "primary" }),
           "min-w-52 shrink-0 select-none disabled:cursor-not-allowed disabled:opacity-60",
         )}
       >

@@ -158,7 +158,7 @@ export function FeedbackBoard({
           type="submit"
           disabled={disabled}
           className={cn(
-            buttonVariants({ variant: "solid" }),
+            buttonVariants({ variant: "primary" }),
             "w-full disabled:cursor-not-allowed disabled:opacity-50",
           )}
         >

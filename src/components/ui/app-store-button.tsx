@@ -5,7 +5,7 @@ import { siteConfig } from "@/content/site";
 import type { VariantProps } from "class-variance-authority";
 
 export function AppStoreButton({
-  variant = "solid",
+  variant = "primary",
   className,
 }: {
   variant?: VariantProps<typeof buttonVariants>["variant"];
