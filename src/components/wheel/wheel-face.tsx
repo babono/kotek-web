@@ -62,6 +62,9 @@ export function WheelFace({
             floodOpacity="0.28"
           />
         </filter>
+        <clipPath id="wheelHubClip">
+          <circle cx={CX} cy={CY} r="34" />
+        </clipPath>
       </defs>
 
       {/* Static rim: stays put so its shadow does not spin with the wheel. */}
@@ -109,18 +112,16 @@ export function WheelFace({
           );
         })}
         <circle cx={CX} cy={CY} r="34" fill="#2e2119" stroke="#faf8f5" strokeWidth="3" />
-        <text
-          x={CX}
-          y={CY}
-          fill="#e1d9d0"
-          fontSize="14"
-          fontWeight="700"
-          textAnchor="middle"
-          dominantBaseline="middle"
-          fontFamily="var(--font-display)"
-        >
-          Kotek
-        </text>
+        <image
+          href="/kotek-logo.png"
+          x={CX - 34}
+          y={CY - 34}
+          width="68"
+          height="68"
+          clipPath="url(#wheelHubClip)"
+          preserveAspectRatio="xMidYMid slice"
+        />
+        <circle cx={CX} cy={CY} r="34" fill="none" stroke="#faf8f5" strokeWidth="3" />
       </g>
 
       {/* Pointer: rotates about its head as each divider knocks it aside. */}

@@ -48,9 +48,9 @@
   --card: var(--brand-surface);
   --card-strong: var(--brand-surface-strong);
   --border: color-mix(in oklab, var(--brand-ebony) 10%, transparent);
-  --primary: var(--brand-brass);
-  --primary-hover: var(--brand-brass-soft);
-  --primary-foreground: var(--brand-ebony);
+  --primary: #fddc8a;
+  --primary-hover: #f3cf73;
+  --primary-foreground: #2e2119;
   --accent: var(--brand-copper);
   --accent-muted: var(--brand-sandalwood);
   /* Inverse = the dark bands (footer, closing CTA, app mockups) */

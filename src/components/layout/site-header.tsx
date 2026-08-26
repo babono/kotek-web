@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { ButtonLink } from "@/components/ui/button";
+import { NavLogo } from "@/components/layout/nav-logo";
 import { navLinks, siteConfig } from "@/content/site";
 
 export function SiteHeader() {
@@ -12,14 +12,7 @@ export function SiteHeader() {
           href="/"
           className="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
         >
-          <Image
-            src="/kotek-logo.png"
-            alt=""
-            width={36}
-            height={36}
-            className="size-9 rounded-lg"
-            priority
-          />
+          <NavLogo />
           <span
             className="font-display text-lg font-bold text-foreground"
             translate="no"
@@ -40,7 +33,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <ButtonLink href={siteConfig.appStoreUrl} size="sm">
+        <ButtonLink href={siteConfig.appStoreUrl} variant="primary" size="sm">
           Get the app
         </ButtonLink>
       </Container>

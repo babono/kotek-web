@@ -18,7 +18,7 @@ export const buttonVariants = cva(
         md: "px-6 py-3.5 text-sm",
       },
     },
-    defaultVariants: { variant: "solid", size: "md" },
+    defaultVariants: { variant: "primary", size: "md" },
   },
 );
 
