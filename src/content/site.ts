@@ -31,7 +31,15 @@ export const footerGroups = [
       { href: "/#mekar-bhuana", label: "Mekar Bhuana" },
       { href: "/feedback", label: "Feedback wall" },
       { href: "/spin", label: "Prize wheel" },
+    ],
+  },
+  {
+    heading: "Help",
+    links: [
+      { href: "/support", label: "Support" },
       { href: `mailto:${siteConfig.email}`, label: "Contact us" },
+      { href: "/privacy", label: "Privacy Policy" },
+      { href: "/terms", label: "Terms of Use" },
     ],
   },
 ] as const;

@@ -8,8 +8,8 @@ import { footerGroups, siteConfig } from "@/content/site";
 export function SiteFooter() {
   return (
     <footer className="mt-auto bg-inverse text-inverse-foreground/70">
-      <Container className="grid gap-12 py-16 md:grid-cols-[minmax(0,1.4fr)_repeat(2,minmax(0,1fr))]">
-        <div className="flex flex-col gap-4">
+      <Container className="grid gap-12 py-16 sm:grid-cols-3 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
+        <div className="flex flex-col gap-4 sm:col-span-3 md:col-span-1">
           <Link
             href="/"
             className="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"

@@ -1,5 +1,7 @@
 import "server-only";
 
+import { headers } from "next/headers";
+
 /**
  * Per-visitor submit cooldown.
  *
@@ -36,4 +38,15 @@ export function checkCooldown(
 
 export function recordSubmission(key: string) {
   lastSeen.set(key, Date.now());
+}
+
+/** Best-effort visitor identity from the proxy headers. */
+export async function visitorKey() {
+  const requestHeaders = await headers();
+  const forwarded = requestHeaders.get("x-forwarded-for");
+  return (
+    forwarded?.split(",")[0]?.trim() ||
+    requestHeaders.get("x-real-ip") ||
+    "unknown"
+  );
 }

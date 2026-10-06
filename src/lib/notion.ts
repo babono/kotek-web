@@ -1,10 +1,12 @@
 import "server-only";
 
 import { FEEDBACK_TAG, type FeedbackNote } from "@/lib/feedback";
+import type { SupportRequest } from "@/lib/support";
 
 /**
- * Minimal Notion REST client for the feedback wall. Two endpoints are all we
- * need, so this talks to the API directly rather than pulling in the SDK.
+ * Minimal Notion REST client for the feedback wall and the support inbox. Two
+ * endpoints are all we need, so this talks to the API directly rather than
+ * pulling in the SDK.
  */
 const NOTION_API = "https://api.notion.com/v1";
 const NOTION_VERSION = "2022-06-28";
@@ -16,15 +18,32 @@ const PROP = {
   approved: "Approved",
 } as const;
 
-function config() {
+/** Property names in the support database. */
+const SUPPORT_PROP = {
+  subject: "Subject",
+  name: "Name",
+  email: "Email",
+  topic: "Topic",
+  device: "Device",
+  message: "Message",
+} as const;
+
+function config(databaseId = process.env.NOTION_FEEDBACK_DATABASE_ID) {
   const token = process.env.NOTION_TOKEN;
-  const databaseId = process.env.NOTION_FEEDBACK_DATABASE_ID;
   if (!token || !databaseId) return null;
   return { token, databaseId };
 }
 
+function supportConfig() {
+  return config(process.env.NOTION_SUPPORT_DATABASE_ID);
+}
+
 export function isNotionConfigured() {
   return config() !== null;
+}
+
+export function isSupportConfigured() {
+  return supportConfig() !== null;
 }
 
 function headers(token: string) {
@@ -137,5 +156,48 @@ export async function createFeedbackNote({
   } catch (error) {
     console.error("[notion] create threw", error);
     return { ok: false, error: "We couldn’t save that. Please try again." };
+  }
+}
+
+/** Notion caps a single rich-text run at 2000 characters. */
+function text(content: string) {
+  return [{ text: { content: content.slice(0, 2000) } }];
+}
+
+export async function createSupportRequest(
+  request: SupportRequest,
+): Promise<{ ok: true } | { ok: false; error: string }> {
+  const cfg = supportConfig();
+  if (!cfg) {
+    return { ok: false, error: "The support inbox isn’t connected yet." };
+  }
+
+  try {
+    const res = await fetch(`${NOTION_API}/pages`, {
+      method: "POST",
+      headers: headers(cfg.token),
+      body: JSON.stringify({
+        parent: { database_id: cfg.databaseId },
+        properties: {
+          [SUPPORT_PROP.subject]: { title: text(request.subject) },
+          [SUPPORT_PROP.name]: { rich_text: text(request.name) },
+          [SUPPORT_PROP.email]: { email: request.email },
+          // Notion adds the option on first use, so the database needs no setup.
+          [SUPPORT_PROP.topic]: { select: { name: request.topic } },
+          [SUPPORT_PROP.device]: { rich_text: text(request.device) },
+          [SUPPORT_PROP.message]: { rich_text: text(request.message) },
+        },
+      }),
+    });
+
+    if (!res.ok) {
+      console.error("[notion] support create failed", res.status, await res.text());
+      return { ok: false, error: "We couldn’t send that. Please try again." };
+    }
+
+    return { ok: true };
+  } catch (error) {
+    console.error("[notion] support create threw", error);
+    return { ok: false, error: "We couldn’t send that. Please try again." };
   }
 }

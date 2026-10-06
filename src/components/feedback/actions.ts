@@ -1,7 +1,6 @@
 "use server";
 
 import { updateTag } from "next/cache";
-import { headers } from "next/headers";
 import {
   COOLDOWN_MS,
   FEEDBACK_TAG,
@@ -9,7 +8,7 @@ import {
   NAME_MAX,
   type FeedbackFormState,
 } from "@/lib/feedback";
-import { checkCooldown, recordSubmission } from "@/lib/rate-limit";
+import { checkCooldown, recordSubmission, visitorKey } from "@/lib/rate-limit";
 import { createFeedbackNote } from "@/lib/notion";
 
 export async function submitFeedback(
@@ -73,15 +72,4 @@ export async function submitFeedback(
     message: "Thanks, your note is on the wall.",
     retryAfter: Math.ceil(COOLDOWN_MS / 1000),
   };
-}
-
-/** Best-effort visitor identity from the proxy headers. */
-async function visitorKey() {
-  const requestHeaders = await headers();
-  const forwarded = requestHeaders.get("x-forwarded-for");
-  return (
-    forwarded?.split(",")[0]?.trim() ||
-    requestHeaders.get("x-real-ip") ||
-    "unknown"
-  );
 }
