@@ -3,8 +3,8 @@ export const siteConfig = {
   tagline: "Learn real gamelan with an interactive practice partner",
   description:
     "Kotek turns your phone into a kotekan practice partner. Mount it above your gangsa and get real-time guidance on which key to strike and when. No instructor or second player required.",
-  /** TestFlight beta. Swap for the App Store listing once the app ships. */
-  appStoreUrl: "https://testflight.apple.com/join/AzSMs356",
+  /** App Store listing. */
+  appStoreUrl: "https://apps.apple.com/app/kotek/id6803080731",
   email: "hello@kotek.app",
   url: "https://kotek.app",
 } as const;
@@ -21,7 +21,7 @@ export const footerGroups = [
     links: [
       { href: "/#features", label: "Features" },
       { href: "/#faq", label: "FAQ" },
-      { href: "/#download", label: "TestFlight Beta" },
+      { href: "/#download", label: "Download" },
     ],
   },
   {
