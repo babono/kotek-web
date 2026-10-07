@@ -34,7 +34,7 @@ export function SiteHeader() {
         </nav>
 
         <ButtonLink href={siteConfig.appStoreUrl} variant="primary" size="sm">
-          Try on TestFlight
+          Get the app
         </ButtonLink>
       </Container>
     </header>
