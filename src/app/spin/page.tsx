@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PrizeWheel } from "@/components/wheel/prize-wheel";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { wheelCopy } from "@/content/wheel";
 
 export const metadata: Metadata = {
@@ -21,11 +22,8 @@ export default function SpinPage() {
           stretching the wheel away from its button. */}
       <Container className="flex max-h-[52rem] min-h-0 w-full flex-1 flex-col items-center gap-4">
         <div className="flex shrink-0 flex-col items-center gap-1.5 text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-border bg-white/70 px-3.5 py-1 text-xs font-medium tracking-wide text-muted-foreground uppercase">
-            <span className="size-1.5 rounded-full bg-primary" aria-hidden />
-            {wheelCopy.eyebrow}
-          </span>
-          <h1 className="text-2xl font-bold text-balance sm:text-3xl">
+          <Eyebrow>{wheelCopy.eyebrow}</Eyebrow>
+          <h1 className="text-5xl leading-[0.9] text-balance sm:text-6xl">
             {wheelCopy.title}
           </h1>
         </div>

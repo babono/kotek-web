@@ -1,70 +1,69 @@
+/* eslint-disable @next/next/no-img-element -- decorative SVGs */
+import { Interlock } from "@/components/interlock/interlock";
 import { AppStoreButton } from "@/components/ui/app-store-button";
 import { ButtonLink } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
-import { HitDetectionShowcase } from "@/components/ui/hit-detection-showcase";
 import { Reveal } from "@/components/ui/reveal";
 import { hero } from "@/content/landing";
 
+/**
+ * One side of the app's landing screen. The gate is drawn far larger than what
+ * shows: only its inner edge reaches in, so it frames the page rather than
+ * filling it. The penjor arches in from behind it, its sampian hanging free.
+ */
+function GateSide({ side }: { side: "left" | "right" }) {
+  const left = side === "left";
+  const mirror = left ? "-scale-x-100" : "";
+  return (
+    <div
+      aria-hidden
+      className={`pointer-events-none absolute inset-y-0 hidden w-64 sm:block lg:w-[22rem] ${left ? "left-0" : "right-0"}`}
+    >
+      <img
+        src="/art/janur-pole.svg"
+        alt=""
+        className={`absolute top-2 hidden h-[23rem] w-auto min-[90rem]:block ${mirror} ${left ? "left-[8.5rem]" : "right-[8.5rem]"}`}
+      />
+      <img
+        src="/art/janur-hang.svg"
+        alt=""
+        className={`absolute top-[3.25rem] hidden h-52 w-auto min-[90rem]:block ${left ? "left-[13.5rem]" : "right-[13.5rem]"}`}
+      />
+      <img
+        src="/art/pura-gate.svg"
+        alt=""
+        className={`absolute top-0 h-[max(100%,44rem)] w-auto max-w-none ${mirror} ${left ? "-translate-x-[76%] lg:-translate-x-[64%]" : "right-0 translate-x-[76%] lg:translate-x-[64%]"}`}
+      />
+    </div>
+  );
+}
+
 export function Hero() {
   return (
-    <section className="relative overflow-hidden py-20 md:py-28">
-      {/* soft brass wash behind the headline */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 -top-40 h-[32rem] bg-[radial-gradient(60%_60%_at_50%_50%,rgba(185,149,38,0.16),transparent_70%)]"
-      />
+    <section className="relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden">
+      <GateSide side="left" />
+      <GateSide side="right" />
 
-      <Container className="relative">
+      <div className="relative flex flex-1 flex-col items-center justify-center px-6 pt-12 pb-8 sm:px-36 md:pt-14 lg:px-6 [@media(max-height:800px)]:pt-8 [@media(max-height:800px)]:pb-5">
         <Reveal
           stagger
-          className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center"
+          className="flex max-w-[56rem] flex-col items-center gap-5 text-center"
         >
-          <h1 className="text-4xl font-bold text-balance sm:text-5xl md:text-6xl md:leading-[1.05]">
+          <h1 className="text-[4.25rem] leading-[0.84] text-balance sm:text-7xl md:text-[5.5rem] lg:text-[6.25rem]">
             {hero.title}
           </h1>
-          <p className="max-w-xl text-lg text-muted-foreground text-pretty">
+          <p className="max-w-xl text-lg leading-snug text-pretty text-body sm:text-[1.3125rem]">
             {hero.description}
           </p>
           <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
-            <AppStoreButton />
-            <ButtonLink href={hero.secondaryCta.href} variant="outline">
-              {hero.secondaryCta.label}
+            <ButtonLink href={hero.primaryCta.href}>
+              {hero.primaryCta.label}
             </ButtonLink>
+            <AppStoreButton size="large" />
           </div>
         </Reveal>
+      </div>
 
-        <Reveal
-          delay={320}
-          className="relative mx-auto mt-14 max-w-5xl md:mt-20"
-        >
-          <figure>
-            <div className="overflow-hidden rounded-lg shadow-[0_40px_90px_-40px_rgba(46,33,25,0.55)] ring-1 ring-border">
-              <div className="relative aspect-video overflow-hidden">
-                <video
-                  src={hero.demoVideoUrl}
-                  autoPlay
-                  loop
-                  muted
-                  // iOS Safari refuses inline autoplay without this and
-                  // takes the video fullscreen instead.
-                  playsInline
-                  disablePictureInPicture
-                  preload="metadata"
-                  className="aspect-video w-full object-cover"
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-            <figcaption className="mt-4 text-center text-sm text-subtle-foreground">
-              {hero.demoCaption}
-            </figcaption>
-          </figure>
-
-          {/* Hit Detection Dual-Engine Showcase */}
-          <HitDetectionShowcase />
-        </Reveal>
-      </Container>
+      <Interlock />
     </section>
   );
 }

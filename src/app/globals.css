@@ -1,65 +1,51 @@
 @import "tailwindcss";
 
 /*
- * Token hierarchy: brand -> semantic -> component.
- * Brand tokens name the paint (sampled from resource/color-scheme.png);
- * semantic tokens name the job. Components only ever use semantic tokens,
- * so a palette change happens in one place.
+ * The design is Laras, the Kotek design system (laras.kotek.app), and the app
+ * is its source: Nawa Sanga colours, Katibeh headings on Putih paper, solid
+ * tactile controls, one red button per screen, Kipli in the outlined bubble.
  */
 :root {
-  /* Brand */
-  --brand-brass: #b99526;
-  --brand-brass-soft: #d9bb62;
-  --brand-copper: #a75e1d;
-  --brand-sandalwood: #c8a989;
-  --brand-marigold: #d98a2b;
-  --brand-brick: #a6372c;
-  --brand-sage: #728868;
-  --brand-ebony: #2e2119;
-  --brand-bark: #56443b;
-  --brand-umber: #655143;
-  --brand-clay: #8c7b6e;
-  --brand-ivory: #e1d9d0;
-  --brand-canvas: #faf8f5;
-  --brand-surface: #f1ece4;
-  --brand-surface-strong: #e8e1d6;
+  /* Nawa Sanga, from the app's asset catalog. Laras documents each one's job. */
+  --merah: #e14b2f; /* the one way on; polos */
+  --merah-tua: #a93321; /* the primary's tactile edge; a miss */
+  --kuning: #f5b331; /* reward, focus: a fill, never type */
+  --gold-text: #8d7044; /* Kuning deepened until it reads */
+  --ireng: #1e2435; /* text, headings, damp */
+  --putih: #fbf6ee; /* the canvas */
+  --sangsih: #2f4b82; /* sangsih, never confused with polos */
+  --pandan: #2e9a68; /* all good */
+  --kayu: #f2ddb4; /* warm wood */
+  --krem: #f5ede0; /* quiet surfaces */
+  --garis: #cdbba3; /* outlines, the secondary's edge */
+  --surface: #ffffff; /* what is raised off the ground */
+  --pattern: #efe2cc; /* the gate silhouettes */
+  --description: #6b6e78; /* supporting text */
+  --key-highlight: #ffda8d; /* a bilah as it is struck */
 
   /*
-   * In-app UI palette, sampled from the Gomelan app screenshots.
-   * Used only by the product mockups so they read as the real thing.
+   * Semantic names, so a screen says what a colour is for. Components use
+   * these or the Nawa Sanga names above, never a hex of their own.
    */
-  --app-bg: #3d322c;
-  --app-panel: #2d231e;
-  --app-bar: #302822;
-  --app-feed: #0c0b02;
-  --app-brass: #c9a063;
-  --app-tan: #d9b896;
-  --app-cream: #f6e3ac;
-  --app-polos: #5fa8d3;
-  --app-sangsih: #a97cd1;
-  --app-miss: #a25842;
-
-  /* Semantic */
-  --background: var(--brand-canvas);
-  --foreground: var(--brand-ebony);
-  --body: var(--brand-bark);
-  --muted-foreground: var(--brand-umber);
-  --subtle-foreground: var(--brand-clay);
-  --card: var(--brand-surface);
-  --card-strong: var(--brand-surface-strong);
-  --border: color-mix(in oklab, var(--brand-ebony) 10%, transparent);
-  --primary: #fddc8a;
-  --primary-hover: #f3cf73;
-  --primary-foreground: #2e2119;
-  --accent: var(--brand-copper);
-  --accent-muted: var(--brand-sandalwood);
-  /* Inverse = the dark bands (footer, closing CTA, app mockups) */
-  --inverse: var(--brand-ebony);
-  --inverse-hover: var(--brand-bark);
-  --inverse-foreground: var(--brand-ivory);
-  --ring: var(--brand-brass);
-  --success: var(--brand-sage);
-  --destructive: var(--brand-brick);
+  --background: var(--putih);
+  --foreground: var(--ireng);
+  --body: color-mix(in srgb, var(--ireng) 85%, var(--putih));
+  --muted-foreground: var(--description);
+  --subtle-foreground: var(--description);
+  --card: var(--krem);
+  --card-strong: var(--kayu);
+  --border: color-mix(in srgb, var(--garis) 60%, transparent);
+  --primary: var(--merah);
+  --primary-hover: #d9432a;
+  --primary-foreground: var(--surface);
+  --accent: var(--merah-tua);
+  --accent-muted: var(--garis);
+  --inverse: var(--ireng);
+  --inverse-hover: #2c3448;
+  --inverse-foreground: var(--putih);
+  --ring: var(--kuning);
+  --success: var(--pandan);
+  --destructive: var(--merah-tua);
 }
 
 @theme inline {
@@ -83,23 +69,28 @@
   --color-success: var(--success);
   --color-destructive: var(--destructive);
 
-  --color-app-bg: var(--app-bg);
-  --color-app-panel: var(--app-panel);
-  --color-app-bar: var(--app-bar);
-  --color-app-feed: var(--app-feed);
-  --color-app-brass: var(--app-brass);
-  --color-app-tan: var(--app-tan);
-  --color-app-cream: var(--app-cream);
-  --color-app-polos: var(--app-polos);
-  --color-app-sangsih: var(--app-sangsih);
-  --color-app-miss: var(--app-miss);
+  --color-merah: var(--merah);
+  --color-merah-tua: var(--merah-tua);
+  --color-kuning: var(--kuning);
+  --color-gold-text: var(--gold-text);
+  --color-ireng: var(--ireng);
+  --color-putih: var(--putih);
+  --color-sangsih: var(--sangsih);
+  --color-pandan: var(--pandan);
+  --color-kayu: var(--kayu);
+  --color-krem: var(--krem);
+  --color-garis: var(--garis);
+  --color-surface: var(--surface);
+  --color-pattern: var(--pattern);
+  --color-key-highlight: var(--key-highlight);
 
-  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
-  /* Headings and the wordmark use the app's own display face. */
-  --font-display: var(--font-dream-orphans), ui-serif, Georgia, serif;
-  --font-serif: var(--font-dream-orphans), ui-serif, Georgia, serif;
+  /* SF Pro Rounded on Apple devices, as the app; Nunito carries it elsewhere. */
+  --font-sans: ui-rounded, "SF Pro Rounded", var(--font-nunito), system-ui, sans-serif;
+  /* Katibeh: the app's display face. One weight, sentence case, always Ireng. */
+  --font-display: var(--font-katibeh), ui-serif, Georgia, serif;
 
   --radius-card: 1.25rem;
+  --radius-kotek: 0.875rem;
 }
 
 @layer base {
@@ -121,24 +112,17 @@
 
   h1,
   h2,
-  h3,
+  h3 {
+    color: var(--foreground);
+    font-family: var(--font-display);
+    font-weight: 400;
+    /* Katibeh has one weight: a bold heading must not be faked. */
+    font-synthesis: none;
+  }
+
   h4 {
     color: var(--foreground);
-  }
-
-  /* Display tier only — the serif is drawn for size. */
-  h1,
-  h2 {
-    font-family: var(--font-display);
-    /* The serif carries its own fitting; tight tracking suited the sans. */
-    letter-spacing: -0.005em;
-  }
-
-  /* Card and sub-headings stay on the sans, which sets more cleanly small. */
-  h3,
-  h4 {
     font-family: var(--font-sans);
-    letter-spacing: -0.02em;
   }
 
   /* Removes the 300ms double-tap zoom delay on touch targets. */
@@ -149,9 +133,40 @@
   }
 
   ::selection {
-    background-color: color-mix(in oklab, var(--primary) 30%, transparent);
-    color: var(--foreground);
+    background-color: var(--kuning);
+    color: var(--ireng);
   }
+}
+
+/*
+ * Tactile, as `Tactile` draws it in the app: the face stands on a base of the
+ * same shape, `--depth` lower, and sinks onto it while pressed. A box-shadow
+ * with no blur is exactly that base.
+ */
+.tactile {
+  --depth: 3px;
+  box-shadow: 0 var(--depth) 0 var(--base, transparent);
+  transition:
+    transform 80ms ease-out,
+    box-shadow 80ms ease-out,
+    background-color 120ms ease-out;
+}
+
+.tactile:active:not(:disabled, [aria-disabled="true"]) {
+  transform: translateY(var(--depth));
+  box-shadow: 0 0 0 var(--base, transparent);
+}
+
+/* Selected: pressed and left pressed, level with its neighbours' edges. */
+.tactile.sunk {
+  transform: translateY(var(--depth));
+  box-shadow: none;
+}
+
+/* The tumpal border: gold teeth with a Merah tooth inside, along a cloth's hem. */
+.tumpal {
+  height: 16px;
+  background: url("/art/tumpal.svg") left top / 24px 16px repeat-x;
 }
 
 /*
@@ -242,23 +257,6 @@
 
 .prize-dialog[open]::backdrop {
   animation: prize-backdrop 0.28s ease-out;
-}
-
-@keyframes scan {
-  0% {
-    left: 0%;
-    opacity: 0;
-  }
-  15% {
-    opacity: 0.8;
-  }
-  85% {
-    opacity: 0.8;
-  }
-  100% {
-    left: 100%;
-    opacity: 0;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

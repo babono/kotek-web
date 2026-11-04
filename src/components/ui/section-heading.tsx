@@ -20,18 +20,18 @@ export function SectionHeading({
     <Reveal
       stagger
       className={cn(
-        "flex max-w-3xl flex-col gap-4",
+        "flex max-w-3xl flex-col gap-3",
         align === "center"
           ? "mx-auto items-center text-center"
           : "items-start text-left",
       )}
     >
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <Heading className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+      <Heading className="text-6xl leading-[0.88] text-balance sm:text-7xl md:text-[5.5rem]">
         {title}
       </Heading>
       {description ? (
-        <p className="text-base text-muted-foreground text-pretty sm:text-lg">
+        <p className="text-lg text-muted-foreground text-pretty sm:text-xl">
           {description}
         </p>
       ) : null}

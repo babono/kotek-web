@@ -25,7 +25,7 @@ const helpCards = [
   },
   {
     title: "Quick answers",
-    body: "What you need before you start, which instruments work, and whether Kotek suits beginners.",
+    body: "Whether Kotek replaces your teacher, if it works on your gangsa, and whether you need sensors.",
     link: { href: "/#faq", label: "Read the FAQ" },
   },
   {

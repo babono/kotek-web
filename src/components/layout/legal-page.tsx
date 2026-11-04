@@ -27,7 +27,7 @@ export function LegalPage({
       <Container className="max-w-3xl">
         <header className="flex flex-col items-start gap-4">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+          <h1 className="text-6xl leading-[0.9] text-balance sm:text-7xl">
             {title}
           </h1>
           <p className="text-sm text-subtle-foreground">Last updated {updated}</p>
@@ -39,7 +39,7 @@ export function LegalPage({
           </div>
         ) : null}
 
-        <div className="mt-12 text-[0.9375rem] leading-relaxed text-pretty [&_a]:font-medium [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-foreground [&_h2]:mt-12 [&_h2]:scroll-mt-24 [&_h2]:text-2xl [&_h2]:font-bold [&_h3]:mt-8 [&_h3]:text-base [&_h3]:font-bold [&_li]:mt-2 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mt-4 [&_strong]:font-semibold [&_strong]:text-foreground [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&>h2:first-child]:mt-0">
+        <div className="mt-12 text-[0.9375rem] leading-relaxed text-pretty [&_a]:font-medium [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2 [&_a:hover]:text-foreground [&_h2]:mt-12 [&_h2]:scroll-mt-24 [&_h2]:text-[2rem] [&_h2]:leading-tight [&_h3]:mt-8 [&_h3]:font-sans [&_h3]:text-base [&_h3]:font-semibold [&_li]:mt-2 [&_ol]:mt-4 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:mt-4 [&_strong]:font-semibold [&_strong]:text-foreground [&_ul]:mt-4 [&_ul]:list-disc [&_ul]:pl-5 [&>h2:first-child]:mt-0">
           {children}
         </div>
       </Container>

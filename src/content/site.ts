@@ -1,34 +1,36 @@
 export const siteConfig = {
   name: "Kotek",
-  tagline: "Learn real gamelan with an interactive practice partner",
+  tagline: "Kotekan was never meant to be played alone",
   description:
-    "Kotek turns your phone into a kotekan practice partner. Mount it above your gangsa and get real-time guidance on which key to strike and when. No instructor or second player required.",
+    "Kotek plays the other half on your own gangsa, so practice doesn’t stop when rehearsal ends. It carries the instructor’s teaching home, by ear and by watching.",
   /** App Store listing. */
   appStoreUrl: "https://apps.apple.com/app/kotek/id6803080731",
   email: "hello@kotek.app",
   url: "https://kotek.app",
 } as const;
 
+/** The page's three chapters, then the questions. */
 export const navLinks = [
+  { href: "/#story", label: "Story" },
   { href: "/#features", label: "Features" },
+  { href: "/#impact", label: "Impact" },
   { href: "/#faq", label: "FAQ" },
-  { href: "/feedback", label: "Feedback" },
 ] as const;
 
 export const footerGroups = [
   {
-    heading: "Product",
+    heading: "Kotek",
     links: [
+      { href: "/#story", label: "Story" },
       { href: "/#features", label: "Features" },
+      { href: "/#impact", label: "Impact" },
       { href: "/#faq", label: "FAQ" },
-      { href: "/#download", label: "Download" },
     ],
   },
   {
     heading: "Community",
     links: [
-      { href: "/#community", label: "Who it’s for" },
-      { href: "/#mekar-bhuana", label: "Mekar Bhuana" },
+      { href: "/#get-involved", label: "Get involved" },
       { href: "/feedback", label: "Feedback wall" },
       { href: "/spin", label: "Prize wheel" },
     ],

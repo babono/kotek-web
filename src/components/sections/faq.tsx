@@ -12,12 +12,9 @@ export function FaqSection() {
           stagger
           className="flex flex-col gap-4 md:sticky md:top-28 md:self-start"
         >
-          <h2 className="text-3xl font-bold text-balance sm:text-4xl md:text-[2.75rem] md:leading-[1.1]">
+          <h2 className="text-6xl leading-[0.88] text-balance sm:text-7xl">
             Everything you need to know
           </h2>
-          <p className="text-muted-foreground text-pretty">
-            We&rsquo;ve answered the questions people ask most often about Kotek.
-          </p>
         </Reveal>
 
         <Reveal stagger className="flex flex-col">

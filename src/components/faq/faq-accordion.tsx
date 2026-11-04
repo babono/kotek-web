@@ -74,20 +74,25 @@ function FaqItem({
     <details open={open} className="border-b border-border first:border-t">
       <summary
         onClick={handleClick}
-        className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left font-medium text-foreground marker:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        className="flex cursor-pointer list-none items-center justify-between gap-6 py-5 text-left text-[1.125rem] font-semibold text-foreground marker:hidden focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         {faq.question}
         <span
           aria-hidden
           className={cn(
             "relative flex size-8 shrink-0 items-center justify-center rounded-full transition-colors duration-300",
-            expanded ? "bg-primary" : "bg-card-strong",
+            expanded ? "bg-ireng" : "bg-krem",
           )}
         >
-          <span className="absolute h-px w-3.5 bg-foreground" />
           <span
             className={cn(
-              "absolute h-3.5 w-px bg-foreground transition-transform duration-300 ease-out",
+              "absolute h-0.5 w-3.5 rounded-full",
+              expanded ? "bg-putih" : "bg-foreground",
+            )}
+          />
+          <span
+            className={cn(
+              "absolute h-3.5 w-0.5 rounded-full bg-foreground transition-transform duration-300 ease-out",
               expanded ? "scale-y-0" : "scale-y-100",
             )}
           />
@@ -102,7 +107,7 @@ function FaqItem({
         <div className="overflow-hidden">
           <p
             className={cn(
-              "pr-14 pb-6 text-sm leading-relaxed text-muted-foreground transition-opacity duration-300 ease-out",
+              "pr-14 pb-6 text-[1.0625rem] leading-relaxed text-pretty transition-opacity duration-300 ease-out",
               expanded ? "opacity-100 delay-75" : "opacity-0",
             )}
           >

@@ -8,31 +8,24 @@ import { footerGroups, siteConfig } from "@/content/site";
 export function SiteFooter() {
   return (
     <footer className="mt-auto bg-inverse text-inverse-foreground/70">
+      <div aria-hidden className="tumpal" />
       <Container className="grid gap-12 py-16 sm:grid-cols-3 md:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))]">
         <div className="flex flex-col gap-4 sm:col-span-3 md:col-span-1">
           <Link
             href="/"
-            className="flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+            aria-label={`${siteConfig.name} home`}
+            className="flex w-fit items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
           >
             <Image
-              src="/kotek-logo.png"
+              src="/art/icon-kotek.svg"
               alt=""
               width={36}
               height={36}
-              className="size-9 rounded-lg"
+              className="size-9"
             />
-            <span
-              className="font-display text-lg font-bold text-inverse-foreground"
-              translate="no"
-            >
-              {siteConfig.name}
-            </span>
-            <KotekSanskrit className="h-4.5 w-auto text-inverse-foreground" />
+            <KotekSanskrit className="h-6 w-auto text-kuning" />
           </Link>
-          <p className="max-w-xs text-sm leading-relaxed">
-            Practice real gamelan with an interactive partner, before there&rsquo;s a teacher
-            or a sekaa to join.
-          </p>
+          <p className="max-w-xs leading-relaxed">{siteConfig.tagline}.</p>
         </div>
 
         {footerGroups.map((group) => (
@@ -48,7 +41,7 @@ export function SiteFooter() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="rounded text-sm transition-colors hover:text-primary-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+                    className="rounded text-sm transition-colors hover:text-kuning focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
                   >
                     {link.label}
                   </Link>
@@ -65,7 +58,7 @@ export function SiteFooter() {
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights
             reserved.
           </p>
-          <p className="flex items-center gap-1.5 flex-wrap">
+          <p className="flex flex-wrap items-center gap-1.5">
             <span>Built at</span>
             <span className="inline-flex items-center gap-1 text-inverse-foreground">
               <AppleIcon className="size-3.5" />
