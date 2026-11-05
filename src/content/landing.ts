@@ -13,18 +13,36 @@ export const hero = {
   primaryCta: { href: "#get-involved", label: "Get involved" },
 } as const;
 
-/** The hero's demo. Kipli's lines are UI, in his voice from the app. */
+/** The app's "How kotekan works" guide, in its own words. */
 export const interlock = {
-  modes: [
-    { id: "polos", label: "Polos", kipli: "Polos alone. Hear the holes?" },
-    { id: "sangsih", label: "Sangsih", kipli: "Sangsih alone. It answers no one." },
-    { id: "both", label: "Both", kipli: "Two halves. Now it’s kotekan!" },
-  ],
-  idle: "Press play. I’ll start you on one half.",
+  title: "How kotekan works",
+  kipli:
+    "One melody, split between two players. Together they sound like one fast line.",
   failed: "I can’t play sound here. Try again in a moment.",
+  stop: "Stop",
+  cards: [
+    {
+      id: "polos",
+      title: "Polos",
+      gloss: "Plays on the beat. The steady half.",
+      hear: "Hear polos",
+    },
+    {
+      id: "sangsih",
+      title: "Sangsih",
+      gloss: "Plays off the beat. Fills the gaps.",
+      hear: "Hear sangsih",
+    },
+    {
+      id: "together",
+      title: "Together",
+      gloss: "Locked in, they make one line.",
+      hear: "Hear together",
+    },
+  ],
 } as const;
 
-export type InterlockMode = (typeof interlock.modes)[number]["id"];
+export type InterlockCard = (typeof interlock.cards)[number]["id"];
 
 export const inside = {
   eyebrow: "Inside Kotek",

@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { howItWorks } from "@/content/landing";
 
 const visuals = [
-  <div key="record" aria-hidden className="relative h-16">
+  <div key="record" aria-hidden className="relative h-20">
     <MiniRoll sangsih={null} />
     <Image
       src="/art/mallet.svg"

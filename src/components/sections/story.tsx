@@ -10,7 +10,7 @@ import { story } from "@/content/landing";
 /** One rehearsal, then a week of nobody to ask. */
 function RehearsalWeek() {
   return (
-    <div aria-hidden className="grid h-16 grid-cols-7 items-center gap-1.5">
+    <div aria-hidden className="grid h-20 grid-cols-7 items-center gap-1.5">
       {Array.from({ length: 7 }, (_, day) => (
         <span
           key={day}
@@ -28,7 +28,7 @@ function RehearsalWeek() {
 const gapVisuals = [
   <RehearsalWeek key="week" />,
   <MiniRoll key="unwritten" polos="ghost" sangsih="ghost" />,
-  <MiniRoll key="half" sangsih="ghost" />,
+  <MiniRoll key="half" sangsih="sangsih-ghost" />,
 ];
 
 export function StorySection() {

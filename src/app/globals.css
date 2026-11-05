@@ -163,6 +163,36 @@
   box-shadow: none;
 }
 
+/*
+ * The sampian swings a little about its tie, as one does in the wind. The two
+ * sides take different periods so they drift in and out of step, as in the app.
+ * Reduce Motion stops it with every other animation, below.
+ */
+@keyframes penjor-swing {
+  from {
+    rotate: -3deg;
+  }
+  to {
+    rotate: 3deg;
+  }
+}
+
+.penjor-hang {
+  transform-origin: top center;
+  animation: penjor-swing calc(var(--swing-period) / 2) ease-in-out infinite alternate;
+}
+
+/* The Hear button's speaker while it sounds, as the app's `.variableColor`. */
+@keyframes speaker-wave {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.speaker-wave {
+  animation: speaker-wave 0.9s ease-in-out infinite;
+}
+
 /* The tumpal border: gold teeth with a Merah tooth inside, along a cloth's hem. */
 .tumpal {
   height: 16px;
