@@ -99,12 +99,12 @@ export function NavLogo() {
     <div className="relative size-9 shrink-0 flex items-center justify-center">
       <Image
         ref={logoRef}
-        src="/logo-kotek.png"
+        src="/art/icon-kotek.svg"
         alt=""
         width={36}
         height={36}
         className="size-9 will-change-transform select-none pointer-events-none"
-        priority
+        preload
       />
     </div>
   );

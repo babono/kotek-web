@@ -1,160 +1,257 @@
 /**
  * All landing page copy lives here so wording changes never require touching
  * a component. Sections import only the slice they render.
+ *
+ * The page follows one arc: story, then features, then impact. The order and
+ * the wording are the team's agreed story; keep sections short, one idea each.
  */
-export type IconName =
-  | "mallet"
-  | "users"
-  | "building"
-  | "bolt"
-  | "spark"
-  | "chart"
-  | "globe";
 
 export const hero = {
-  eyebrow: "For gangsa players",
-  title: "Learn real gamelan with an interactive practice partner",
+  title: "Kotekan was never meant to be played alone",
   description:
-    "Mount your phone above your gangsa. Kotek guides your strikes, listens to check your timing, and plays the interlocking kotekan part alongside you.",
-  secondaryCta: { href: "#features", label: "See how it works" },
-  demoVideoUrl: "/hero-video-compress.mp4",
-  demoCaption:
-    "Mount your phone above the instrument. Kotek shows you which key to strike, and listens to check that you hit it.",
+    "Kotek plays the other half on your own gangsa, so practice doesn’t stop when rehearsal ends.",
+  primaryCta: { href: "#get-involved", label: "Get involved" },
 } as const;
 
-export const hitDetection = {
-  eyebrow: "Dual-Engine Hit Detection",
-  title: "How Kotek verifies strikes in real time",
-  description:
-    "Physical gamelan produces loud resonance and fast hand damping. Kotek pairs computer vision with acoustic spectrum analysis for zero-latency, error-free strike detection.",
-  engines: [
+/** The app's "How kotekan works" guide, in its own words. */
+export const interlock = {
+  title: "How kotekan works",
+  kipli:
+    "One melody, split between two players. Together they sound like one fast line.",
+  failed: "I can’t play sound here. Try again in a moment.",
+  stop: "Stop",
+  cards: [
     {
-      id: "vision",
-      badge: "Vision AI",
-      status: "Spatial Tracking",
-      title: "Vision AI: Spatial Key Detection",
-      description:
-        "Uses your phone’s camera to detect physical bilah (keys) and track mallet movement, determining the exact key being struck.",
+      id: "polos",
+      title: "Polos",
+      gloss: "Plays on the beat. The steady half.",
+      hear: "Hear polos",
     },
     {
-      id: "audio",
-      badge: "Acoustic ML",
-      status: "Spectrum Trigger",
-      title: "Audio Analyzer: Acoustic Spectrum Trigger",
-      description:
-        "Trained on the unique harmonic voice spectrum of bronze gangsa keys to detect the precise microsecond trigger and onset of each strike.",
+      id: "sangsih",
+      title: "Sangsih",
+      gloss: "Plays off the beat. Fills the gaps.",
+      hear: "Hear sangsih",
+    },
+    {
+      id: "together",
+      title: "Together",
+      gloss: "Locked in, they make one line.",
+      hear: "Hear together",
     },
   ],
-  fusion: {
-    badge: "Sensor Fusion Engine",
-    description:
-      "Vision identifies the key, while audio detects the exact microsecond hit. Together, they eliminate false triggers with zero perceptible latency.",
-  },
 } as const;
 
-export const problem = {
-  title: "No instructor or partner to play with? No problem",
-  description:
-    "Gamelan was never meant to be played alone, but finding an instructor or a partner to play with is not easy, and that makes practicing feel almost impossible.",
-  cards: [
-    {
-      title: "Finding a partner to practice daily with is hard",
-      body: "Kotekan needs two players interlocking. Coordinating schedules with a teacher or partner means most days, you don’t practice at all.",
-    },
-    {
-      title: "Learning resources are hard to find",
-      body: "Notes and patterns are passed down from mouth to mouth. Finding them is tiring and time-consuming, so you waste the time you’d rather spend playing.",
-    },
-    {
-      title: "No one to correct you",
-      body: "Don’t let unnoticed mistakes become a habit. Kotek guides you to play with the correct timing and accent.",
-    },
-  ],
-  closing: {
-    title: "Kotek helps re-create the learning environment",
-    body: "Keep waiting on a partner and a resource, and you will never practice.",
-  },
-} as const;
+export type InterlockCard = (typeof interlock.cards)[number]["id"];
 
-export const audiences = {
-  title: "Built from the community, for everyone",
-  cards: [
+export const inside = {
+  eyebrow: "Inside Kotek",
+  title: "Three screens from our app",
+  screens: [
     {
-      icon: "mallet",
-      title: "Learners",
-      body: "Improve your playing by making daily practice easier to start.",
+      id: "play",
+      label: "Play",
+      caption: "Kotek plays the other half while the waterfall shows what’s next.",
+      image: "/screens/play.jpg",
+      alt: "The Kotek play screen: notes falling in lanes onto a drawn gangsa.",
     },
     {
-      icon: "users",
-      title: "Community",
-      body: "Create new kotekan patterns and spread them to community members.",
-    },
-    {
-      icon: "building",
-      title: "University",
-      body: "Get hands on gamelan without waiting for ensemble time or a full instrument set.",
-    },
-  ],
-} as const satisfies {
-  title: string;
-  cards: readonly { icon: IconName; title: string; body: string }[];
-};
-
-export const features = {
-  title: "Interactive learning and real-time guidance",
-  cards: [
-    {
-      id: "patterns",
-      eyebrow: "Patterns",
-      title: "Learn various kotekan patterns",
-      body: "Beginner to expert patterns help you improve at your own pace. Step up to a higher difficulty when you are ready.",
-      tint: "bg-card",
-    },
-    {
-      id: "roles",
-      eyebrow: "Roles",
-      title: "Adjust to match your play style",
-      body: "Different configurations to match your play style. Choose one of the kotekan roles, then let Kotek play the other to create a harmonious interlocking pattern.",
-      tint: "bg-accent-muted/25",
+      id: "studio",
+      label: "Kotek Studio",
+      caption: "Every instructor records their own kotekan and shares it with their students.",
+      image: "/screens/studio.jpg",
+      alt: "Kotek Studio: a piano roll of polos notes above a drawn gangsa.",
     },
     {
       id: "feedback",
-      eyebrow: "Feedback",
-      title: "Track your improvement",
-      body: "Behind the scenes, a machine learning model detects your key hits and outputs a score that lets you track your improvement.",
-      tint: "bg-card-strong",
+      label: "Feedback",
+      caption: "Sensors catch every strike and show where you slipped.",
+      image: "/screens/feedback.jpg",
+      alt: "Where to polish: three strokes marked on the roll, and Kipli explaining that bilah 8 came a little early in 4 of 7 cycles.",
     },
   ],
 } as const;
 
-export const benefits = {
-  title: "Built to preserve gamelan knowledge",
-  cards: [
+export const story = {
+  eyebrow: "The story",
+  title: "Gamelan lives in people, not books",
+  lead: "It’s learned by ear and by watching the teacher’s mallet.",
+  proverb: "Meguru kuping, meguru panggul.",
+  body: "Gamelan is everywhere in Bali, and young people want to learn. But in the banjar and schools we visited, we saw how few people there are to teach it.",
+  video: {
+    src: "/timelapse.mp4",
+    poster: "/story/timelapse-poster.jpg",
+    caption: "Our team learning kotekan at Mekar Bhuana, the way everyone does: by ear, on the floor, beside a teacher.",
+  },
+  gaps: [
     {
-      icon: "bolt",
-      title: "Get you to practice immediately",
-      body: "Turn hours of hunting for resources and matching schedules into a practice space that’s ready when you are.",
+      title: "Taught only at rehearsal.",
+      body: "Between sessions, there’s no one to learn from.",
     },
     {
-      icon: "spark",
-      title: "Make the learning process fun",
-      body: "An interactive interface and game-like cues make playing gamelan exciting.",
+      title: "Nothing written down.",
+      body: "Kotekan lives in the instructor’s memory.",
     },
     {
-      icon: "chart",
-      title: "Track skill improvement over time",
-      body: "Every session is scored, so the progress you can’t feel day to day becomes something you can see.",
-    },
-    {
-      icon: "globe",
-      title: "Promote the culture and grow the community",
-      body: "Keep the culture alive by getting people to play without hassle, and help communities flourish at the same time.",
+      title: "Kotekan needs two.",
+      body: "Alone, you can only practise half.",
     },
   ],
-} as const satisfies {
-  title: string;
-  cards: readonly { icon: IconName; title: string; body: string }[];
-};
+  turn: {
+    title: "A full gamelan set, and no one to teach it.",
+    body: "That’s what we found at one school. Without practice between rehearsals, students fall behind, and some let go of gamelan.",
+  },
+} as const;
+
+export const howItWorks = {
+  eyebrow: "How Kotek works",
+  title: "Three steps",
+  steps: [
+    {
+      number: "01",
+      title: "Record.",
+      body: "The instructor plays their kotekan once, on their own gangsa.",
+    },
+    {
+      number: "02",
+      title: "Practise.",
+      body: "Kotek plays the other half while the waterfall shows what’s next.",
+    },
+    {
+      number: "03",
+      title: "Improve.",
+      body: "Sensors catch every strike and show where you slipped.",
+    },
+  ],
+} as const;
+
+export const complement = {
+  title: { before: "Kotek does", not: "not", after: "replace the instructor" },
+  body: "It carries their teaching home, the same way gamelan has always been taught: by ear and by watching.",
+} as const;
+
+export const designed = {
+  title: "Designed for gamelan",
+  features: [
+    {
+      id: "engage",
+      title: "Designed to engage",
+      body: "The other half, in your gangsa’s own voice. A waterfall and a damp cue make practising alone feel like playing with a partner.",
+      image: "/screens/engage.jpg",
+      alt: "The Learn screen: a kotekan taught step by step on the waterfall, with Kipli guiding.",
+    },
+    {
+      id: "expression",
+      title: "Designed for expression",
+      body: "Kotek Studio. Every instructor records their own kotekan and shares it with their students.",
+      image: "/screens/expression.jpg",
+      alt: "Choosing a kotekan, with a tab for the ones you made yourself.",
+    },
+    {
+      id: "ignite",
+      title: "Designed to ignite",
+      body: "Sensors on the gangsa feel every real strike. Precise feedback turns each practice into progress you can see.",
+      image: "/screens/ignite.jpg",
+      alt: "A session’s result: “Your hands are learning.”, with cycles, time played and accuracy.",
+    },
+    {
+      id: "last",
+      title: "Designed to last",
+      body: "Every kotekan recorded is kept in its sanggar’s own sound, for the next generation.",
+      image: "/screens/last.jpg",
+      alt: "Adding a gangsa in Kotek: recording the sound of each bilah.",
+    },
+  ],
+} as const;
+
+export const realGangsa = {
+  eyebrow: "Why a real gangsa?",
+  title: "Gamelan apps let you tap a screen. Technique lives in your hands.",
+  body: "The mallet, the damping hand, the timing between two players. Kotek works on a real instrument, so you build real technique.",
+  photo: {
+    src: "/mekar-bhuana/photo-centre.png",
+    alt: "A circle of players at their gamelan instruments at Mekar Bhuana.",
+  },
+  points: ["The mallet", "The damping hand", "The timing between two players"],
+} as const;
+
+export const impact = {
+  eyebrow: "Where we are",
+  title: "Tested with students and instructors",
+  places: [
+    {
+      kind: "Schools",
+      names: ["SDN 2 Tuban", "SDN 6 Tuban Kuta", "SMP Negeri 1 Kuta"],
+    },
+    {
+      kind: "Banjar",
+      names: ["Banjar Tuban Griya", "Banjar Segara Kuta"],
+    },
+    {
+      kind: "Sanggar",
+      names: ["Mekar Bhuana"],
+    },
+  ],
+  status: [
+    {
+      state: "live",
+      label: "On the App Store",
+      body: "Kotek v1.",
+    },
+    {
+      state: "building",
+      label: "In development",
+      body: "v2, with sensors and Kotek Studio.",
+    },
+    {
+      state: "building",
+      label: "Still measuring",
+      body: "Sensor accuracy in real banjar conditions.",
+    },
+  ],
+} as const;
+
+export const about = {
+  eyebrow: "About us",
+  title: "Apple Developer Academy Bali, with Mekar Bhuana",
+  paragraph:
+    "Bali is known around the world for its culture, and gamelan is at its heart. Gamelan isn’t learned from books. It’s passed from teacher to student, by ear and by watching. When we visited banjar and schools, we saw how much students depend on their instructors, and how few instructors there are. One school had a full gamelan set and no one to teach it. Kotek doesn’t replace the teacher. It brings their kotekan home, plays the other half, and gives students a way to keep practising until they’re back at the banjar.",
+  photo: {
+    src: "/mekar-bhuana/photo-mekarbhuana.jpg",
+    alt: "The Kotek team together at Mekar Bhuana, among photos of the workshops.",
+  },
+  partner: {
+    name: "Mekar Bhuana",
+    href: "https://balimusicanddance.com",
+    logo: "/mekar-bhuana/logo-mekarbhuana.svg",
+  },
+  team: ["Babono", "Ivan", "Putu", "Dimas", "Rhea", "Hercio", "Farhan"],
+} as const;
+
+export const contribute = {
+  eyebrow: "Get involved",
+  title: "Ways to contribute",
+  ways: [
+    {
+      who: "Instructors",
+      what: "Record a kotekan for your students",
+      cta: "Write to us",
+      subject: "Recording a kotekan with Kotek",
+    },
+    {
+      who: "Schools and sanggar",
+      what: "Host a practice session with us",
+      cta: "Write to us",
+      subject: "Hosting a Kotek practice session",
+    },
+    {
+      who: "Students",
+      what: "Try Kotek and tell us what’s missing",
+      cta: "Leave a note",
+      href: "/feedback",
+    },
+  ],
+} as const;
 
 export const feedback = {
   title: "Your feedback is valuable to our team",
@@ -164,53 +261,5 @@ export const feedback = {
 
 export const closingCta = {
   title: "Mari ber-gangsa",
-  description:
-    "Make your learning interactive and fun. Start your gamelan journey with Kotek.",
+  description: "Start your gamelan journey with Kotek.",
 } as const;
-
-export const mekarBhuana = {
-  eyebrow: "Community Collaboration",
-  title: "Rooted in tradition with Mekar Bhuana",
-  tagline: "To blossom around the world",
-  description:
-    "That is what Mekar Bhuana means, and it is the hope behind it: that Bali’s oldest music and dance become known again, at home and beyond it. In developing Kotek, we worked alongside Mekar Bhuana to understand how gamelan is truly taught, heard, and preserved.",
-  video: {
-    src: "/timelapse.mp4",
-    caption:
-      "How we understand the process of learning gamelan at the first place — observing traditional practice, hand damping, and the natural flow of kotekan.",
-  },
-  audio: {
-    src: "/mekar-bhuana/workshop-gangsa.m4a",
-    title: "Workshop session recording",
-    description: "Live gangsa rehearsal recorded at Mekar Bhuana",
-  },
-  pillars: [
-    {
-      title: "The Centre",
-      description:
-        "A family-run centre in Denpasar that documents, reconstructs and repatriates endangered classical gamelan. Vaughan Hatch founded it in 2000 around an antique Semara Pagulingan he restored, having found how few classical ensembles were ever recorded. Putu Evie Suyadnyani, a Legong dancer, brought the dance in 2004.",
-      image: "/mekar-bhuana/photo-founder.png",
-      alt: "Vaughan Hatch and Putu Evie Suyadnyani, founders of Mekar Bhuana",
-    },
-    {
-      title: "The Collection",
-      description:
-        "Twenty-seven gamelan sets: twenty-two in Bali, five at Mekar Bhuana Aotearoa in New Zealand. Among them a Semara Patangian in the old key order that exists nowhere else outside Bali, and Semara Kirang, an Angklung set from Lombok restored in 2019.",
-      image: "/mekar-bhuana/photo-collection.png",
-      alt: "Antique gamelan instruments in the Mekar Bhuana collection",
-    },
-    {
-      title: "Visiting & Workshops",
-      description:
-        "Lessons, workshops and cultural immersion, led by English-speaking experts including a native-speaking ethnomusicologist. The centre is a family home, so there are no walk-ins — book by email two weeks ahead.",
-      image: "/mekar-bhuana/photo-centre.png",
-      alt: "Mekar Bhuana centre and workshop space in Denpasar",
-    },
-  ],
-  cta: {
-    href: "https://balimusicanddance.com",
-    label: "Visit Mekar Bhuana",
-    domain: "balimusicanddance.com",
-  },
-} as const;
-

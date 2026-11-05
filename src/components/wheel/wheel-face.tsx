@@ -15,9 +15,15 @@ const HEAD_R = 17;
 const TIP_Y = 72;
 
 const TONE_FILL = {
-  sticker: "#5fa8d3",
-  candy: "#a97cd1",
-  keychain: "#fddc8a",
+  sticker: "#2f4b82",
+  candy: "#e14b2f",
+  keychain: "#f5b331",
+} as const;
+
+const TONE_TEXT = {
+  sticker: "#ffffff",
+  candy: "#ffffff",
+  keychain: "#1e2435",
 } as const;
 
 /** Degrees are measured clockwise from 12 o'clock, matching the pointer. */
@@ -58,7 +64,7 @@ export function WheelFace({
             dx="0"
             dy="3"
             stdDeviation="5"
-            floodColor="#2e2119"
+            floodColor="#1e2435"
             floodOpacity="0.28"
           />
         </filter>
@@ -68,14 +74,14 @@ export function WheelFace({
       </defs>
 
       {/* Static rim: stays put so its shadow does not spin with the wheel. */}
-      <circle cx={CX} cy={CY} r={R + 18} fill="#2e2119" filter="url(#wheelShadow)" />
+      <circle cx={CX} cy={CY} r={R + 18} fill="#1e2435" filter="url(#wheelShadow)" />
       {STUDS.map(([x, y], i) => (
-        <circle key={i} cx={x} cy={y} r="2.6" fill="#e1d9d0" opacity="0.45" />
+        <circle key={i} cx={x} cy={y} r="2.6" fill="#f5ede0" opacity="0.45" />
       ))}
 
       {/* Only this group turns; the pointer above stays put. */}
       <g ref={wheelRef} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
-        <circle cx={CX} cy={CY} r={R + 1} fill="#faf8f5" />
+        <circle cx={CX} cy={CY} r={R + 1} fill="#fbf6ee" />
         {wheelSlices.map((slice, i) => {
           const start = i * SLICE_ANGLE;
           const mid = start + SLICE_ANGLE / 2;
@@ -92,13 +98,13 @@ export function WheelFace({
               <path
                 d={wedgePath(start, start + SLICE_ANGLE)}
                 fill={TONE_FILL[slice.tone]}
-                stroke="#faf8f5"
+                stroke="#fbf6ee"
                 strokeWidth="2"
               />
               <text
                 x={tx}
                 y={ty}
-                fill="#2e2119"
+                fill={TONE_TEXT[slice.tone]}
                 fontSize="13"
                 fontWeight="700"
                 textAnchor="middle"
@@ -111,9 +117,9 @@ export function WheelFace({
             </g>
           );
         })}
-        <circle cx={CX} cy={CY} r="34" fill="#2e2119" stroke="#faf8f5" strokeWidth="3" />
+        <circle cx={CX} cy={CY} r="34" fill="#fbf6ee" stroke="#fbf6ee" strokeWidth="3" />
         <image
-          href="/kotek-logo.png"
+          href="/art/icon-kotek.svg"
           x={CX - 34}
           y={CY - 34}
           width="68"
@@ -121,7 +127,7 @@ export function WheelFace({
           clipPath="url(#wheelHubClip)"
           preserveAspectRatio="xMidYMid slice"
         />
-        <circle cx={CX} cy={CY} r="34" fill="none" stroke="#faf8f5" strokeWidth="3" />
+        <circle cx={CX} cy={CY} r="34" fill="none" stroke="#fbf6ee" strokeWidth="3" />
       </g>
 
       {/* Pointer: rotates about its head as each divider knocks it aside. */}
@@ -131,10 +137,10 @@ export function WheelFace({
       >
         <path
           d={`M ${CX} ${TIP_Y} L ${CX - HEAD_R} ${HEAD_Y} A ${HEAD_R} ${HEAD_R} 0 1 1 ${CX + HEAD_R} ${HEAD_Y} Z`}
-          fill="#2e2119"
+          fill="#1e2435"
           filter="url(#wheelShadow)"
         />
-        <circle cx={CX} cy={HEAD_Y} r="6.5" fill="#e1d9d0" />
+        <circle cx={CX} cy={HEAD_Y} r="6.5" fill="#f5ede0" />
       </g>
     </svg>
   );

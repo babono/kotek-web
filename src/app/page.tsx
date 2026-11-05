@@ -1,24 +1,36 @@
-import { AudienceSection } from "@/components/sections/audience";
-import { BenefitsSection } from "@/components/sections/benefits";
+import { AboutSection } from "@/components/sections/about";
 import { ClosingCta } from "@/components/sections/closing-cta";
+import { ComplementSection } from "@/components/sections/complement";
+import { ContributeSection } from "@/components/sections/contribute";
+import { DesignedSection } from "@/components/sections/designed";
 import { FaqSection } from "@/components/sections/faq";
-import { FeaturesSection } from "@/components/sections/features";
 import { Hero } from "@/components/sections/hero";
-import { MekarBhuanaSection } from "@/components/sections/mekar-bhuana";
-import { ProblemSection } from "@/components/sections/problem";
+import { HowItWorksSection } from "@/components/sections/how-it-works";
+import { ImpactSection } from "@/components/sections/impact";
+import { InsideSection } from "@/components/sections/inside";
+import { RealGangsaSection } from "@/components/sections/real-gangsa";
+import { StorySection } from "@/components/sections/story";
 
+/** Story, then features, then impact. The order is the argument. */
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <ProblemSection />
-      <AudienceSection />
-      <MekarBhuanaSection />
-      <FeaturesSection />
-      <BenefitsSection />
+      <InsideSection />
+
+      <StorySection />
+
+      <HowItWorksSection />
+      <ComplementSection />
+      <DesignedSection />
+      <RealGangsaSection />
+
+      <ImpactSection />
+      <AboutSection />
+      <ContributeSection />
+
       <FaqSection />
       <ClosingCta />
     </>
   );
 }
-
