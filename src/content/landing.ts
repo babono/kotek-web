@@ -84,28 +84,6 @@ export const story = {
   },
 } as const;
 
-export const howItWorks = {
-  eyebrow: "How Kotek works",
-  title: "Three steps",
-  steps: [
-    {
-      number: "01",
-      title: "Record.",
-      body: "The instructor plays their kotekan once, on their own gangsa.",
-    },
-    {
-      number: "02",
-      title: "Practise.",
-      body: "Kotek plays the other half while the waterfall shows what’s next.",
-    },
-    {
-      number: "03",
-      title: "Improve.",
-      body: "Sensors catch every strike and show where you slipped.",
-    },
-  ],
-} as const;
-
 export const complement = {
   title: { before: "Kotek does", not: "not", after: "replace the instructor" },
   body: "It carries their teaching home, the same way gamelan has always been taught: by ear and by watching.",
@@ -117,8 +95,10 @@ export const complement = {
  * bilah recordings through the app's normal paths.
  */
 export const designed = {
-  title: "Made for gamelan",
-  description: "Four pillars that spell GONG, the stroke that completes every cycle.",
+  eyebrow: "How Kotek works",
+  title: "Four pillars, one GONG",
+  description:
+    "Groove with the other half, own your kotekan, notice every strike, and guard your sanggar’s sound.",
   features: [
     {
       id: "play",

@@ -10,9 +10,13 @@ import { cn } from "@/lib/utils";
 
 export function DesignedSection() {
   return (
-    <Section id="designed">
+    <Section id="features">
       <Container>
-        <SectionHeading title={designed.title} description={designed.description} />
+        <SectionHeading
+          eyebrow={designed.eyebrow}
+          title={designed.title}
+          description={designed.description}
+        />
 
         <div className="mt-12 flex flex-col gap-4">
           {designed.features.map((feature, i) => (

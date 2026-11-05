@@ -1,12 +1,11 @@
 import { kotekanSample } from "@/content/kotekan";
 import { cn } from "@/lib/utils";
 
-type NoteStyle = "polos" | "sangsih" | "gold" | "ghost" | "sangsih-ghost";
+type NoteStyle = "polos" | "sangsih" | "ghost" | "sangsih-ghost";
 
 const NOTE: Record<NoteStyle, string> = {
   polos: "bg-merah",
   sangsih: "bg-sangsih",
-  gold: "bg-kuning",
   ghost: "border-[1.5px] border-dashed border-garis",
   "sangsih-ghost": "border-[1.5px] border-dashed border-sangsih/55 bg-sangsih/8",
 };
