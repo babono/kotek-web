@@ -225,7 +225,7 @@ export const about = {
     href: "https://balimusicanddance.com",
     logo: "/mekar-bhuana/logo-mekarbhuana.svg",
   },
-  team: ["Babono", "Ivan", "Putu", "Dimas", "Rhea", "Hercio", "Farhan"],
+  team: ["Babono", "Putu", "Dimas", "Rhea", "Hercio", "Farhan"],
 } as const;
 
 export const contribute = {
