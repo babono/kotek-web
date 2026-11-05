@@ -1,9 +1,14 @@
+import { placeIcons } from "@/components/icons/place-icons";
+import { PlaceMap } from "@/components/sections/place-map";
 import { Container } from "@/components/ui/container";
+import { Eyebrow } from "@/components/ui/eyebrow";
 import { Reveal } from "@/components/ui/reveal";
 import { Section } from "@/components/ui/section";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { impact } from "@/content/landing";
 import { cn } from "@/lib/utils";
+
+const { market } = impact;
 
 export function ImpactSection() {
   return (
@@ -11,30 +16,8 @@ export function ImpactSection() {
       <Container>
         <SectionHeading eyebrow={impact.eyebrow} title={impact.title} />
 
-        {/* The picker's selected card: gold ring, gold edge, tumpal along the top. */}
         <Reveal className="mt-12">
-          <div className="tactile overflow-hidden rounded-[1.75rem] border-[3px] border-kuning bg-surface [--base:#e5a020] [--depth:6px]">
-            <div aria-hidden className="tumpal" />
-            <div className="grid gap-10 p-7 md:grid-cols-[auto_auto_auto] md:justify-between md:gap-8 md:p-12">
-              {impact.places.map((group) => (
-                <div key={group.kind}>
-                  <h3 className="font-sans text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
-                    {group.kind}
-                  </h3>
-                  <ul className="mt-4 flex flex-col gap-2">
-                    {group.names.map((name) => (
-                      <li
-                        key={name}
-                        className="font-display text-[2.75rem] leading-[1] text-foreground md:text-[3.25rem]"
-                      >
-                        {name}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
+          <PlaceMap />
         </Reveal>
 
         <Reveal stagger className="mt-8 grid gap-3 md:grid-cols-3">
@@ -57,6 +40,53 @@ export function ImpactSection() {
             </div>
           ))}
         </Reveal>
+
+        <Reveal stagger className="mt-16 flex flex-col items-center gap-3 text-center md:mt-24">
+          <Eyebrow>{market.eyebrow}</Eyebrow>
+          <h3 className="max-w-3xl text-[3.5rem] leading-[0.88] text-balance md:text-[4.75rem]">
+            {market.title}
+          </h3>
+        </Reveal>
+
+        <Reveal stagger className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {market.stats.map((stat) => {
+            const Icon = placeIcons[stat.icon];
+            return (
+              <article
+                key={stat.label}
+                className="flex flex-col gap-3 rounded-card border-[1.5px] border-garis/60 bg-surface p-6"
+              >
+                <Icon className="size-6 text-ireng" />
+                <div>
+                  <p className="mt-2 font-display text-[4rem] leading-[0.7] text-foreground">
+                    {stat.value}
+                  </p>
+                  <p className="mt-3 text-[1.0625rem] leading-snug text-pretty">{stat.label}</p>
+                  {"note" in stat ? (
+                    <p className="mt-2 text-sm text-pretty text-muted-foreground">{stat.note}</p>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
+        </Reveal>
+
+        <p className="mt-5 text-center text-sm text-pretty text-muted-foreground">
+          {market.sourcesLabel}:{" "}
+          {market.sources.map((source, i) => (
+            <span key={source.href}>
+              {i > 0 ? " · " : null}
+              <a
+                href={source.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline underline-offset-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+              >
+                {source.label}
+              </a>
+            </span>
+          ))}
+        </p>
       </Container>
     </Section>
   );
