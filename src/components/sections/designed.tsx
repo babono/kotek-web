@@ -21,8 +21,8 @@ export function DesignedSection() {
                 className={cn(
                   "grid items-center gap-8 overflow-hidden rounded-[1.75rem] p-6 sm:p-8 lg:gap-12 lg:p-12",
                   i % 2 === 0
-                    ? "bg-krem lg:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)]"
-                    : "bg-kayu/45 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]",
+                    ? "bg-krem lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]"
+                    : "bg-kayu/45 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]",
                 )}
               >
                 <div className={cn(i % 2 === 1 && "lg:order-2")}>
