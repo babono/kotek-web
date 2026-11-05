@@ -1,3 +1,4 @@
+import type { StaticImageData } from "next/image";
 import { LoopingVideo } from "@/components/ui/looping-video";
 
 /** A landscape iPhone: solid, like everything else in the app. No glass. */
@@ -7,7 +8,7 @@ export function DeviceFrame({
   label,
 }: {
   video: string;
-  poster: string;
+  poster: StaticImageData;
   label: string;
 }) {
   return (
@@ -16,7 +17,7 @@ export function DeviceFrame({
         src={video}
         poster={poster}
         label={label}
-        className="block aspect-[1200/624] w-full rounded-[5%/10%] bg-putih object-cover"
+        className="block aspect-[1200/626] w-full rounded-[5%/10%] bg-putih"
       />
     </div>
   );

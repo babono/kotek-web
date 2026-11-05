@@ -21,7 +21,7 @@ export function SiteFooter() {
               alt=""
               width={36}
               height={36}
-              className="size-9"
+              className="size-9 object-contain"
             />
             <KotekSanskrit className="h-6 w-auto text-kuning" />
           </Link>

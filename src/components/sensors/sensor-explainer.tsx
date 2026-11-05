@@ -15,7 +15,7 @@ const STEP_TIMES = [
 ];
 
 /**
- * The button and popup behind "See your progress". The diagram only exists
+ * The button and popup behind Notice. The diagram only exists
  * while the popup is open, and remounts on every strike to replay its CSS.
  */
 export function SensorExplainer() {

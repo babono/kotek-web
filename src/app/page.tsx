@@ -17,8 +17,8 @@ export default function HomePage() {
       <Hero />
       <StorySection />
 
-      <HowItWorksSection />
       <ComplementSection />
+      <HowItWorksSection />
       <DesignedSection />
       <RealGangsaSection />
 

@@ -325,6 +325,20 @@
   animation: sensor-step var(--step-for) ease-in-out var(--step-at) both;
 }
 
+/*
+ * The nawa sanga rose turns slowly, as it does on the app's splash. Reduce
+ * Motion stops it with every other animation, below.
+ */
+@keyframes rose-turn {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.rose-turn {
+  animation: rose-turn 60s linear infinite;
+}
+
 /* The tumpal border: gold teeth with a Merah tooth inside, along a cloth's hem. */
 .tumpal {
   height: 16px;
