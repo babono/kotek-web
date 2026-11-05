@@ -13,8 +13,8 @@ export function RealGangsaSection() {
           <Image
             src={realGangsa.photo.src}
             alt={realGangsa.photo.alt}
-            width={1132}
-            height={678}
+            width={1800}
+            height={1200}
             sizes="(min-width: 1024px) 34rem, 100vw"
             className="h-auto w-full rounded-card"
           />
