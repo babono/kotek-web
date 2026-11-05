@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- decorative SVGs */
-import { Interlock } from "@/components/interlock/interlock";
+import { Gangsa } from "@/components/interlock/gangsa";
+import { KotekanGuide } from "@/components/interlock/kotekan-guide";
 import { AppStoreButton } from "@/components/ui/app-store-button";
 import { ButtonLink } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -59,7 +60,8 @@ export function Hero() {
           className="flex max-w-[56rem] flex-col items-center gap-5 text-center"
         >
           <h1 className="text-[4.25rem] leading-[0.84] text-balance sm:text-7xl md:text-[5.5rem] lg:text-[6.25rem] [@media(max-height:800px)]:lg:text-[5rem]">
-            {hero.title}
+            <KotekanGuide word={hero.title.word} />{" "}
+            {hero.title.rest}
           </h1>
           <p className="max-w-xl text-lg leading-snug text-pretty text-body sm:text-[1.3125rem]">
             {hero.description}
@@ -73,7 +75,7 @@ export function Hero() {
         </Reveal>
       </div>
 
-      <Interlock />
+      <Gangsa />
     </section>
   );
 }
