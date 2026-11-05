@@ -30,7 +30,11 @@ const MALLET = {
   lift: 16,
 };
 
-/** How a bilah behaves once struck, from `GangsaTable`. */
+/** Seconds per mallet stroke, and how a bilah behaves once struck: `GangsaTable`. */
+const STROKE = 0.26;
+const LOOK_BACK = 5;
+/** Where in the phrase the gangsa rests under Reduce Motion. */
+const STILL = STROKE * 20.4;
 const RING = 0.85;
 const DIP = 2;
 const DIP_DECAY = 0.09;
@@ -49,12 +53,24 @@ const ROUNDS = 2;
 const voicesFor = (card: InterlockCard | null): readonly Voice[] =>
   card === null || card === "together" ? ["polos", "sangsih"] : [card];
 
-const keyAt = (voices: readonly Voice[], slot: number) => {
-  for (const voice of voices) {
-    const key = kotekanSample[voice][slot % SLOTS];
-    if (key !== null) return key;
-  }
-  return null;
+/** A cheap, well-mixed integer hash: the same stroke always lands the same. */
+const hash = (x: number) => {
+  let h = Math.imul(x ^ (x >>> 16), 0x85ebca6b);
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35);
+  return (h ^ (h >>> 16)) >>> 0;
+};
+
+/**
+ * Which bilah the mallet strikes on stroke `n`. It has nothing to do with the
+ * sample: the gangsa plays itself forever, as on the app's landing screen.
+ * Deliberately not random across all ten bilah, which looks like a fault:
+ * as `GangsaTable` does, it picks within a window of four adjacent keys that
+ * wanders along the instrument, so it looks like someone playing.
+ */
+const struckKey = (n: number) => {
+  const start = hash(Math.floor(n / 16)) % (KEY_COUNT - 3);
+  const offsets = n % 2 === 0 ? [0, 2] : [1, 3];
+  return Math.min(KEY_COUNT - 1, start + offsets[hash(n + 977) % 2]);
 };
 
 const mix = (from: number[], to: number[], amount: number) =>
@@ -62,9 +78,9 @@ const mix = (from: number[], to: number[], amount: number) =>
 
 /**
  * The app's "How kotekan works" guide, over the gangsa from its landing screen.
- * Three cards, each drawing the same short sample; hearing one plays it on the
- * gangsa below, with the card's gold ring, the bilah and the one mallet all on
- * the audio clock. Left alone, the gangsa plays the whole line silently.
+ * Three cards, each drawing the same short sample; hearing one rings its notes
+ * in gold on the audio clock. The gangsa is apart from that: its one mallet
+ * plays on by itself, whether or not anything is sounding.
  */
 export function Interlock() {
   const [hearing, setHearing] = useState<InterlockCard | null>(null);
@@ -75,24 +91,16 @@ export function Interlock() {
   const stage = useRef<HTMLDivElement>(null);
   const keys = useRef<(HTMLSpanElement | null)[]>([]);
   const mallet = useRef<HTMLImageElement>(null);
-  const voices = useRef(voicesFor(null));
-  /** When slot 0 lands, on whichever clock is driving the frame. */
+  /** When slot 0 of the sample lands, on the audio clock. */
   const origin = useRef(0);
   const sounding = useRef(false);
   const shownSlot = useRef<number | null>(null);
 
   const { silence, now: audioNow, start } = useInterlockAudio();
 
-  const clock = useCallback(
-    () => (sounding.current ? audioNow() : performance.now() / 1000),
-    [audioNow],
-  );
-
-  /** Back to the silent gangsa. Natural ends leave the last stroke ringing. */
+  /** Back to silence. Natural ends leave the last stroke ringing. */
   const finish = useCallback(() => {
     sounding.current = false;
-    voices.current = voicesFor(null);
-    origin.current = performance.now() / 1000;
     shownSlot.current = null;
     setSlot(null);
     setLive(false);
@@ -114,7 +122,6 @@ export function Interlock() {
     try {
       const at = await start(voicesFor(card), ROUNDS);
       if (at === null) return;
-      voices.current = voicesFor(card);
       origin.current = at;
       sounding.current = true;
       setLive(true);
@@ -136,44 +143,36 @@ export function Interlock() {
     let onScreen = true;
     let scale = box.clientWidth / TABLE.width;
 
-    const draw = () => {
-      const t = Math.max(0, clock() - origin.current);
-      const playing = voices.current;
-
-      if (sounding.current) {
-        const current = Math.floor(t / SLOT);
-        if (current >= SLOTS * ROUNDS) {
-          finish();
-          return;
-        }
-        if (current % SLOTS !== shownSlot.current) {
-          shownSlot.current = current % SLOTS;
-          setSlot(shownSlot.current);
-        }
+    /** Follows the sample: only the gold ring is on the audio clock. */
+    const followSample = () => {
+      if (!sounding.current) return;
+      const current = Math.floor(Math.max(0, audioNow() - origin.current) / SLOT);
+      if (current >= SLOTS * ROUNDS) {
+        finish();
+      } else if (current % SLOTS !== shownSlot.current) {
+        shownSlot.current = current % SLOTS;
+        setSlot(shownSlot.current);
       }
+    };
 
-      // The strokes around now, newest first: what the mallet and bilah follow.
-      const recent: { slot: number; key: number }[] = [];
-      for (let s = Math.floor(t / SLOT); s >= 0 && recent.length < 6; s--) {
-        const key = keyAt(playing, s);
-        if (key !== null) recent.push({ slot: s, key });
-      }
+    /** The gangsa, a pure function of the clock, as `GangsaTable` draws it. */
+    const drawGangsa = (t: number) => {
+      const n = Math.floor(t / STROKE);
 
-      keys.current.forEach((el, index) => {
+      keys.current.forEach((el, key) => {
         if (!el) return;
-        const at = recent.findIndex((stroke) => stroke.key === index);
         let face = REST;
         let dip = 0;
-        if (at >= 0) {
-          const age = t - recent[at].slot * SLOT;
+        for (let back = 0; back <= LOOK_BACK; back++) {
+          if (n < back || struckKey(n - back) !== key) continue;
+          const age = t - (n - back) * STROKE;
           dip = DIP * Math.exp(-age / DIP_DECAY);
-          if (at === 0) {
-            face = mix(BILAH, STRUCK, Math.max(0, 1 - age / RING));
-          } else {
-            // Damped the moment the next stroke landed.
-            const since = t - recent[at - 1].slot * SLOT;
-            face = mix(BILAH, DAMPED, Math.max(0, 1 - (since / DAMP_FADE) ** 2));
-          }
+          face =
+            back === 0
+              ? mix(BILAH, STRUCK, Math.max(0, 1 - age / RING))
+              : // Damped the moment the next stroke landed.
+                mix(BILAH, DAMPED, Math.max(0, 1 - ((age - STROKE) / DAMP_FADE) ** 2));
+          break;
         }
         el.style.backgroundColor = face;
         el.style.transform = `translateY(${dip * scale}px)`;
@@ -183,14 +182,11 @@ export function Interlock() {
       if (head) {
         // Contact at each stroke, a quick rebound, the move to the next key in
         // the middle of the gap, and the fall onto it.
-        const from = recent[0] ?? { slot: 0, key: keyAt(playing, 0) ?? 5 };
-        let to = from.slot + 1;
-        let next = keyAt(playing, to);
-        while (next === null) next = keyAt(playing, ++to);
-        const p = Math.min(1, (t - from.slot * SLOT) / ((to - from.slot) * SLOT));
+        const p = t / STROKE - n;
         const travel = Math.min(1, Math.max(0, (p - 0.15) / 0.6));
         const eased = travel * travel * (3 - 2 * travel);
-        const x = keyCentre(from.key) + (keyCentre(next) - keyCentre(from.key)) * eased;
+        const from = keyCentre(struckKey(n));
+        const x = from + (keyCentre(struckKey(n + 1)) - from) * eased;
         const angle = MALLET.lift * (1 - Math.max(Math.exp(-p / 0.08), p ** 6));
         head.style.transform =
           `translate(${(x - MALLET.strike.x) * scale}px, ${(KEYS.top - MALLET.strike.y) * scale}px) ` +
@@ -198,13 +194,12 @@ export function Interlock() {
       }
     };
 
+    const moving = () => !reduceMotion.matches;
+
     const loop = () => {
-      draw();
-      if (sounding.current || !reduceMotion.matches) {
-        frame = requestAnimationFrame(loop);
-      } else {
-        frame = 0;
-      }
+      followSample();
+      if (moving()) drawGangsa(performance.now() / 1000);
+      frame = sounding.current || moving() ? requestAnimationFrame(loop) : 0;
     };
     const run = () => {
       if (!frame && onScreen) frame = requestAnimationFrame(loop);
@@ -214,13 +209,13 @@ export function Interlock() {
       frame = 0;
     };
 
-    if (!sounding.current) origin.current = performance.now() / 1000 - SLOT * 8;
-    draw();
+    // Under Reduce Motion it stands still, mid-phrase.
+    drawGangsa(STILL);
     run();
 
     const resize = new ResizeObserver(() => {
       scale = box.clientWidth / TABLE.width;
-      draw();
+      drawGangsa(moving() ? performance.now() / 1000 : STILL);
     });
     resize.observe(box);
 
@@ -242,17 +237,20 @@ export function Interlock() {
       resize.disconnect();
       seen.disconnect();
     };
-    // `live` restarts the loop, which under Reduce Motion only runs while
-    // sound is playing.
-  }, [clock, finish, live, stop]);
+    // `live` restarts the loop, which under Reduce Motion only runs to follow
+    // the sample.
+  }, [audioNow, finish, live, stop]);
 
   return (
     <div className="relative z-10 flex w-full flex-col items-center">
       <div className="flex w-full max-w-[64rem] flex-col gap-4 px-6 sm:px-36 lg:px-6">
         <div className="flex flex-col items-center gap-3 lg:flex-row lg:justify-between lg:gap-8">
-          <h2 className="text-center text-[2.75rem] leading-none lg:shrink-0 lg:text-left">
-            {interlock.title}
-          </h2>
+          <div className="text-center lg:shrink-0 lg:text-left">
+            <h2 className="text-[2.75rem] leading-none">{interlock.title}</h2>
+            <p className="mt-1 text-[1.0625rem] text-pretty text-body">
+              {interlock.definition}
+            </p>
+          </div>
           <KipliSays live mood={failed ? "sad" : "happy"}>
             {failed ? interlock.failed : interlock.kipli}
           </KipliSays>

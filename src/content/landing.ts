@@ -16,6 +16,7 @@ export const hero = {
 /** The app's "How kotekan works" guide, in its own words. */
 export const interlock = {
   title: "How kotekan works",
+  definition: "Kotekan is a part of gamelan music, played on the gangsa.",
   kipli:
     "One melody, split between two players. Together they sound like one fast line.",
   failed: "I can’t play sound here. Try again in a moment.",
