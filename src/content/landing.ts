@@ -187,8 +187,8 @@ export const realGangsa = {
   title: "Gamelan apps let you tap a screen. Technique lives in your hands.",
   body: "The mallet, the damping hand, the timing between two players. Kotek works on a real instrument, so you build real technique.",
   photo: {
-    src: "/mekar-bhuana/photo-centre.png",
-    alt: "A circle of players at their gamelan instruments at Mekar Bhuana.",
+    src: "/story/real-gangsa.jpg",
+    alt: "A young player smiles at a screen on a stand while the team and visitors from Mekar Bhuana look on.",
   },
   points: ["The mallet", "The damping hand", "The timing between two players"],
 } as const;
