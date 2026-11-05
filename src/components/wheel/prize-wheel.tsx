@@ -286,7 +286,7 @@ export function PrizeWheel() {
         onClick={(event) => {
           if (event.target === dialogRef.current) dialogRef.current?.close();
         }}
-        className="prize-dialog m-auto w-[min(22rem,calc(100vw-2rem))] overscroll-contain rounded-card border border-border bg-background p-8 text-center shadow-2xl backdrop:bg-foreground/60"
+        className="pop-dialog m-auto w-[min(22rem,calc(100vw-2rem))] overscroll-contain rounded-card border border-border bg-background p-8 text-center shadow-2xl backdrop:bg-foreground/60"
       >
         <p className="text-xs font-semibold tracking-[0.2em] text-accent uppercase">
           You won
