@@ -183,20 +183,158 @@ export const realGangsa = {
 export const impact = {
   eyebrow: "Where we are",
   title: "Tested with students and instructors",
+  map: {
+    image: "/art/place-map.svg",
+    alt: "A drawn street map of Kuta and Tuban, in the south of Bali, with the airport below.",
+    credit: { label: "© OpenStreetMap", href: "https://www.openstreetmap.org/copyright" },
+    /** Must match `bounds` in scripts/build-place-map.mjs. */
+    bounds: { north: -8.715, south: -8.765, west: 115.15, east: 115.205 },
+    /** What the map opens on: every pin, with room around them. */
+    home: { lat: -8.7402, lng: 115.1729 },
+    /** Mekar Bhuana is off this map, so choosing it heads that way. */
+    towardsDenpasar: { lat: -8.7295, lng: 115.1835 },
+  },
+  hint: "Tap a pin and I’ll take you there.",
+  close: "Back to the whole map",
+  groups: [
+    { kind: "school", label: "Schools", singular: "School" },
+    { kind: "banjar", label: "Banjar", singular: "Banjar" },
+    { kind: "sanggar", label: "Sanggar", singular: "Sanggar" },
+    { kind: "home", label: "Home base", singular: "Home base" },
+  ],
+  areas: [
+    { name: "Kuta", lat: -8.7362, lng: 115.1712 },
+    { name: "Tuban", lat: -8.7428, lng: 115.1748 },
+    { name: "Ngurah Rai Airport", lat: -8.7466, lng: 115.1702, wideOnly: true },
+  ],
   places: [
     {
-      kind: "Schools",
-      names: ["SDN 2 Tuban", "SDN 6 Tuban Kuta", "SMP Negeri 1 Kuta"],
+      id: "sdn-2-tuban",
+      kind: "school",
+      name: "SDN 2 Tuban",
+      where: "Jalan Taman Griya, Tuban",
+      body: "A state primary school, and one of the three schools where we tested Kotek.",
+      lat: -8.74007,
+      lng: 115.17603,
+      labelSide: "left",
     },
     {
-      kind: "Banjar",
-      names: ["Banjar Tuban Griya", "Banjar Segara Kuta"],
+      id: "sdn-6-tuban",
+      kind: "school",
+      name: "SDN 6 Tuban Kuta",
+      where: "Jalan Raya Tuban",
+      body: "A state primary school, and one of the three schools where we tested Kotek.",
+      lat: -8.74074,
+      lng: 115.1791,
+      labelSide: "right",
     },
     {
-      kind: "Sanggar",
-      names: ["Mekar Bhuana"],
+      id: "smpn-1-kuta",
+      kind: "school",
+      name: "SMP Negeri 1 Kuta",
+      where: "Jalan Dewi Sartika, Kuta",
+      body: "A state junior high, and one of the three schools where we tested Kotek.",
+      lat: -8.73869,
+      lng: 115.16827,
+      labelSide: "right",
+    },
+    {
+      id: "banjar-tuban-griya",
+      kind: "banjar",
+      name: "Banjar Tuban Griya",
+      where: "Tuban",
+      body: "One of the two banjar where we tested Kotek, in the conditions it has to work in.",
+      lat: -8.74471,
+      lng: 115.17987,
+      labelSide: "right",
+    },
+    {
+      id: "banjar-segara-kuta",
+      kind: "banjar",
+      name: "Banjar Segara Kuta",
+      where: "Kuta",
+      body: "One of the two banjar where we tested Kotek, in the conditions it has to work in.",
+      lat: -8.73825,
+      lng: 115.16589,
+      labelSide: "left",
+    },
+    {
+      id: "academy",
+      kind: "home",
+      name: "Apple Developer Academy",
+      where: "Kuta",
+      body: "Where Kotek was built, a few streets from the schools and banjar that shaped it.",
+      lat: -8.73732,
+      lng: 115.17612,
+      labelSide: "right",
     },
   ],
+  /** Too far to pin on this map, so it gets a sign pointing the way instead. */
+  farPlace: {
+    id: "mekar-bhuana",
+    kind: "sanggar",
+    name: "Mekar Bhuana",
+    distance: "14 km",
+    where: "Kesiman, Denpasar",
+    body: "Our partner sanggar, and where our team learned kotekan: by ear, on the floor, beside a teacher.",
+    photo: {
+      src: "/mekar-bhuana/photo-centre.png",
+      alt: "A circle of players at their gamelan instruments at Mekar Bhuana.",
+      width: 1132,
+      height: 678,
+    },
+    link: { href: "https://balimusicanddance.com", label: "Visit Mekar Bhuana" },
+  },
+  market: {
+    eyebrow: "Where it can go",
+    title: "Everywhere gamelan lives, kotekan needs two",
+    stats: [
+      {
+        icon: "school",
+        value: "3,012",
+        label: "primary and junior high schools in Bali",
+      },
+      {
+        icon: "banjar",
+        value: "4,432",
+        label: "banjar across Bali",
+      },
+      {
+        icon: "sanggar",
+        value: "14,000+",
+        label: "gangsa seats in Bali’s gong kebyar alone",
+        note: "Our estimate: 1,600 sets, nine gangsa each.",
+      },
+      {
+        icon: "world",
+        value: "500+",
+        label: "gamelan ensembles outside Indonesia",
+      },
+    ],
+    sourcesLabel: "Sources",
+    sources: [
+      {
+        label: "Kemendikdasmen",
+        href: "https://referensi.data.kemendikdasmen.go.id/pendidikan/dikdas",
+      },
+      {
+        label: "Dinas PMA Bali, via BRIDA Badung",
+        href: "https://brida.badungkab.go.id/artikel/52036-banjar-sebagai-coworking-space",
+      },
+      {
+        label: "I Wayan Rai (2008), in BASAbali",
+        href: "https://dictionary.basabali.org/Music_Gamelan_Gong_Kebyar",
+      },
+      {
+        label: "Wikipedia",
+        href: "https://en.wikipedia.org/wiki/Gangsa",
+      },
+      {
+        label: "Clendinning (2015), Smithsonian",
+        href: "https://asia-archive.si.edu/essays/article-clendinning/",
+      },
+    ],
+  },
   status: [
     {
       state: "live",
@@ -215,6 +353,8 @@ export const impact = {
     },
   ],
 } as const;
+
+export type PlaceKind = (typeof impact.groups)[number]["kind"];
 
 export const about = {
   eyebrow: "About us",

@@ -10,6 +10,7 @@
   --merah: #e14b2f; /* the one way on; polos */
   --merah-tua: #a93321; /* the primary's tactile edge; a miss */
   --kuning: #f5b331; /* reward, focus: a fill, never type */
+  --kuning-edge: #e5a020; /* the selected card's gold-tinted base */
   --gold-text: #8d7044; /* Kuning deepened until it reads */
   --ireng: #1e2435; /* text, headings, damp */
   --putih: #fbf6ee; /* the canvas */
@@ -328,6 +329,66 @@
 .tumpal {
   height: 16px;
   background: url("/art/tumpal.svg") left top / 24px 16px repeat-x;
+}
+
+/*
+ * The map in "Where we are". The frame is the size container, so a view is
+ * written once, in terms of the frame: put `--cx --cy` (fractions of the map)
+ * at the focus point, `--z` times larger. Map and pins take the same transform
+ * transition, so a pin stays on its street the whole way, at its own size.
+ * The drawing is wider than the frame, which is what leaves room to pan.
+ */
+.place-map {
+  /* A container is not a containing block: without this, nothing here clips. */
+  position: relative;
+  container-type: size;
+  overflow: hidden;
+  background-color: var(--putih);
+  --map-width: 300cqw;
+  --map-height: calc(var(--map-width) * 0.9197);
+  --focus-x: 0.5;
+  --focus-y: 0.5;
+}
+
+.place-map[data-open="true"] {
+  --focus-y: 0.56;
+}
+
+/* Wide enough to step back; the card now sits over the map's left, so the focus moves right of it. */
+@media (min-width: 1024px) {
+  .place-map {
+    --map-width: 242cqw;
+  }
+
+  .place-map[data-open="true"] {
+    --focus-x: 0.64;
+  }
+}
+
+.place-map-layer,
+.place-map-pin {
+  --tx: calc(var(--focus-x) * 100cqw - var(--cx) * var(--map-width) * var(--z));
+  --ty: calc(var(--focus-y) * 100cqh - var(--cy) * var(--map-height) * var(--z));
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.place-map-layer {
+  width: var(--map-width);
+  height: var(--map-height);
+  transform: translate(var(--tx), var(--ty)) scale(var(--z));
+  transform-origin: 0 0;
+}
+
+.place-map-pin {
+  width: 0;
+  height: 0;
+  transform: translate(
+    calc(var(--tx) + var(--x) * var(--map-width) * var(--z)),
+    calc(var(--ty) + var(--y) * var(--map-height) * var(--z))
+  );
 }
 
 /*
