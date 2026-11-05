@@ -7,7 +7,6 @@ import { FaqSection } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
 import { HowItWorksSection } from "@/components/sections/how-it-works";
 import { ImpactSection } from "@/components/sections/impact";
-import { InsideSection } from "@/components/sections/inside";
 import { RealGangsaSection } from "@/components/sections/real-gangsa";
 import { StorySection } from "@/components/sections/story";
 
@@ -16,8 +15,6 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <InsideSection />
-
       <StorySection />
 
       <HowItWorksSection />

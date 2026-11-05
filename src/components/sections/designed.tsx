@@ -1,3 +1,4 @@
+import { SensorExplainer } from "@/components/sensors/sensor-explainer";
 import { Container } from "@/components/ui/container";
 import { DeviceFrame } from "@/components/ui/device-frame";
 import { Reveal } from "@/components/ui/reveal";
@@ -30,11 +31,12 @@ export function DesignedSection() {
                   <p className="mt-4 text-lg leading-relaxed text-pretty">
                     {feature.body}
                   </p>
+                  {"explainer" in feature ? <SensorExplainer /> : null}
                 </div>
                 <DeviceFrame
-                  src={feature.image}
-                  alt={feature.alt}
-                  sizes="(min-width: 1024px) 40rem, 100vw"
+                  video={feature.video}
+                  poster={feature.poster}
+                  label={feature.label}
                 />
               </article>
             </Reveal>

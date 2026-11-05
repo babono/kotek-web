@@ -45,34 +45,6 @@ export const interlock = {
 
 export type InterlockCard = (typeof interlock.cards)[number]["id"];
 
-export const inside = {
-  eyebrow: "Inside Kotek",
-  title: "Three screens from our app",
-  screens: [
-    {
-      id: "play",
-      label: "Play",
-      caption: "Kotek plays the other half while the waterfall shows what’s next.",
-      image: "/screens/play.jpg",
-      alt: "The Kotek play screen: notes falling in lanes onto a drawn gangsa.",
-    },
-    {
-      id: "studio",
-      label: "Kotek Studio",
-      caption: "Every instructor records their own kotekan and shares it with their students.",
-      image: "/screens/studio.jpg",
-      alt: "Kotek Studio: a piano roll of polos notes above a drawn gangsa.",
-    },
-    {
-      id: "feedback",
-      label: "Feedback",
-      caption: "Sensors catch every strike and show where you slipped.",
-      image: "/screens/feedback.jpg",
-      alt: "Where to polish: three strokes marked on the roll, and Kipli explaining that bilah 8 came a little early in 4 of 7 cycles.",
-    },
-  ],
-} as const;
-
 export const story = {
   eyebrow: "The story",
   title: "Gamelan lives in people, not books",
@@ -131,36 +103,68 @@ export const complement = {
   body: "It carries their teaching home, the same way gamelan has always been taught: by ear and by watching.",
 } as const;
 
+/**
+ * Each clip is the real app, recorded from a build of it. A simulator has no
+ * gangsa, so `play` and `voice` were fed simulated strikes and the app's own
+ * bilah recordings through the app's normal paths.
+ */
 export const designed = {
-  title: "Designed for gamelan",
+  title: "Made for gamelan",
   features: [
     {
-      id: "engage",
-      title: "Designed to engage",
+      id: "play",
+      title: "Play along",
       body: "The other half, in your gangsa’s own voice. A waterfall and a damp cue make practising alone feel like playing with a partner.",
-      image: "/screens/engage.jpg",
-      alt: "The Learn screen: a kotekan taught step by step on the waterfall, with Kipli guiding.",
+      video: "/captures/play.mp4",
+      poster: "/captures/play.jpg",
+      label: "The play screen: notes fall onto the gangsa, and each strike is called out as it lands.",
     },
     {
-      id: "expression",
-      title: "Designed for expression",
+      id: "yours",
+      title: "Make it yours",
       body: "Kotek Studio. Every instructor records their own kotekan and shares it with their students.",
-      image: "/screens/expression.jpg",
-      alt: "Choosing a kotekan, with a tab for the ones you made yourself.",
+      video: "/captures/studio.mp4",
+      poster: "/captures/studio.jpg",
+      label: "Opening a kotekan from the list in Kotek Studio, adding polos and sangsih strokes, and playing it back.",
     },
     {
-      id: "ignite",
-      title: "Designed to ignite",
+      id: "progress",
+      title: "See your progress",
       body: "Sensors on the gangsa feel every real strike. Precise feedback turns each practice into progress you can see.",
-      image: "/screens/ignite.jpg",
-      alt: "A session’s result: “Your hands are learning.”, with cycles, time played and accuracy.",
+      video: "/captures/feedback.mp4",
+      poster: "/captures/feedback.jpg",
+      label: "A session’s result, then Where to polish, with Kipli explaining the strokes that slipped.",
+      explainer: true,
     },
     {
-      id: "last",
-      title: "Designed to last",
+      id: "alive",
+      title: "Keep it alive",
       body: "Every kotekan recorded is kept in its sanggar’s own sound, for the next generation.",
-      image: "/screens/last.jpg",
-      alt: "Adding a gangsa in Kotek: recording the sound of each bilah.",
+      video: "/captures/voice.mp4",
+      poster: "/captures/voice.jpg",
+      label: "Adding a gangsa: recording each bilah’s own sound, one key at a time.",
+    },
+  ],
+} as const;
+
+/** The popup behind "See your progress". */
+export const sensors = {
+  cta: "See how the sensors work",
+  title: "How the sensors work",
+  kipli: "Every strike makes the bilah vibrate. That vibration is what Kotek reads.",
+  close: "Got it",
+  steps: [
+    {
+      title: "You strike the bilah",
+      body: "It vibrates, the same way it always has.",
+    },
+    {
+      title: "A piezo disc feels it",
+      body: "One small disc under each bilah turns that vibration into a signal.",
+    },
+    {
+      title: "Bluetooth tells the app",
+      body: "A controller sends your phone which bilah you hit, and when.",
     },
   ],
 } as const;
