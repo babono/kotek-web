@@ -5,7 +5,6 @@ import { ContributeSection } from "@/components/sections/contribute";
 import { DesignedSection } from "@/components/sections/designed";
 import { FaqSection } from "@/components/sections/faq";
 import { Hero } from "@/components/sections/hero";
-import { HowItWorksSection } from "@/components/sections/how-it-works";
 import { ImpactSection } from "@/components/sections/impact";
 import { RealGangsaSection } from "@/components/sections/real-gangsa";
 import { StorySection } from "@/components/sections/story";
@@ -18,7 +17,6 @@ export default function HomePage() {
       <StorySection />
 
       <ComplementSection />
-      <HowItWorksSection />
       <DesignedSection />
       <RealGangsaSection />
 
