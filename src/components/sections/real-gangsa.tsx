@@ -19,12 +19,12 @@ export function RealGangsaSection() {
             className="h-auto w-full rounded-card"
           />
         </Reveal>
-        <Reveal stagger className="flex flex-col items-start gap-5">
+        <Reveal stagger className="flex flex-col items-start gap-[1.125rem]">
           <Eyebrow>{realGangsa.eyebrow}</Eyebrow>
-          <h2 className="text-[3.5rem] leading-[0.88] text-balance md:text-[4.75rem]">
+          <h2 className="text-[3.25rem] leading-[0.95] text-balance md:text-[4.125rem]">
             {realGangsa.title}
           </h2>
-          <p className="text-lg leading-relaxed text-pretty">{realGangsa.body}</p>
+          <p className="text-lg leading-snug text-pretty">{realGangsa.body}</p>
           <ul className="flex flex-wrap gap-2">
             {realGangsa.points.map((point) => (
               <li
