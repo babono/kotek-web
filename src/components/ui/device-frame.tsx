@@ -1,32 +1,22 @@
-import Image from "next/image";
-import { cn } from "@/lib/utils";
+import { LoopingVideo } from "@/components/ui/looping-video";
 
 /** A landscape iPhone: solid, like everything else in the app. No glass. */
 export function DeviceFrame({
-  src,
-  alt,
-  sizes,
-  className,
+  video,
+  poster,
+  label,
 }: {
-  src: string;
-  alt: string;
-  sizes: string;
-  className?: string;
+  video: string;
+  poster: string;
+  label: string;
 }) {
   return (
-    <div
-      className={cn(
-        "tactile rounded-[6%/13%] bg-ireng p-[1.1%] [--base:var(--garis)] [--depth:5px]",
-        className,
-      )}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        width={1800}
-        height={828}
-        sizes={sizes}
-        className="block h-auto w-full rounded-[5%/11%]"
+    <div className="tactile rounded-[6%/12%] bg-ireng p-[1.1%] [--base:var(--garis)] [--depth:5px]">
+      <LoopingVideo
+        src={video}
+        poster={poster}
+        label={label}
+        className="block aspect-[1200/624] w-full rounded-[5%/10%] bg-putih object-cover"
       />
     </div>
   );
