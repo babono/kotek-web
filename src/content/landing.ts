@@ -371,19 +371,33 @@ export type PlaceKind = (typeof impact.groups)[number]["kind"];
 
 export const about = {
   eyebrow: "About us",
-  title: "Apple Developer Academy Bali, with Mekar Bhuana",
-  paragraph:
-    "Bali is known around the world for its culture, and gamelan is at its heart. Gamelan isn’t learned from books. It’s passed from teacher to student, by ear and by watching. When we visited banjar and schools, we saw how much students depend on their instructors, and how few instructors there are. One school had a full gamelan set and no one to teach it. Kotek doesn’t replace the teacher. It brings their kotekan home, plays the other half, and gives students a way to keep practising until they’re back at the banjar.",
+  title: "The people behind Kotek",
+  intro:
+    "We’re a team from Apple Developer Academy Bali, building Kotek alongside the people who teach gamelan.",
+  team: [
+    { name: "Babono", role: "Project Manager" },
+    { name: "Steven", role: "IoT Engineer" },
+    { name: "Dimas", role: "Product Engineer" },
+    { name: "Rhea", role: "Product Engineer" },
+    { name: "Hercio", role: "UI/UX Designer" },
+    { name: "Farhan", role: "Illustrator" },
+    { name: "Ivan", role: "Mentor" },
+  ],
   photo: {
     src: "/mekar-bhuana/photo-mekarbhuana.jpg",
-    alt: "The Kotek team together at Mekar Bhuana, among photos of the workshops.",
+    alt: "Members of the Kotek team at Mekar Bhuana, among photos of the workshops.",
+  },
+  origin: {
+    label: "Where we come from",
+    name: "Apple Developer Academy Bali",
   },
   partner: {
+    label: "Who we learn from",
     name: "Mekar Bhuana",
     href: "https://balimusicanddance.com",
     logo: "/mekar-bhuana/logo-mekarbhuana.svg",
+    body: "A gamelan centre in Denpasar that helped us understand how gamelan is truly taught, heard and preserved.",
   },
-  team: ["Babono", "Putu", "Dimas", "Rhea", "Hercio", "Farhan"],
 } as const;
 
 export const contribute = {
