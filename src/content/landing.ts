@@ -7,7 +7,8 @@
  */
 
 export const hero = {
-  title: "Kotekan was never meant to be played alone",
+  /** Split because the word itself opens the explanation of kotekan. */
+  title: { word: "Kotekan", rest: "was never meant to be played alone" },
   description:
     "Kotek plays the other half on your own gangsa, so practice doesn’t stop when rehearsal ends.",
   primaryCta: { href: "#get-involved", label: "Get involved" },
@@ -21,6 +22,7 @@ export const interlock = {
     "One melody, split between two players. Together they sound like one fast line.",
   failed: "I can’t play sound here. Try again in a moment.",
   stop: "Stop",
+  close: "Got it",
   cards: [
     {
       id: "polos",
