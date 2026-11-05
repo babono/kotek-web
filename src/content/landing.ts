@@ -1,3 +1,9 @@
+import feedbackPoster from "../../public/captures/feedback.jpg";
+import playPoster from "../../public/captures/play.jpg";
+import studioPoster from "../../public/captures/studio.jpg";
+import voicePoster from "../../public/captures/voice.jpg";
+import timelapsePoster from "../../public/story/timelapse-poster.jpg";
+
 /**
  * All landing page copy lives here so wording changes never require touching
  * a component. Sections import only the slice they render.
@@ -49,32 +55,32 @@ export type InterlockCard = (typeof interlock.cards)[number]["id"];
 
 export const story = {
   eyebrow: "The story",
-  title: "Gamelan lives in people, not books",
-  lead: "It’s learned by ear and by watching the teacher’s mallet.",
+  title: "Bali keeps its gamelan in people, not pages",
+  lead: "Bali is an island rich in culture, and gamelan lives in its everyday life. Children learn it from an early age, at school and in the banjar.",
+  taught: "It’s taught by an instructor, mostly by ear and by watching the mallet.",
   proverb: "Meguru kuping, meguru panggul.",
-  body: "Gamelan is everywhere in Bali, and young people want to learn. But in the banjar and schools we visited, we saw how few people there are to teach it.",
   video: {
     src: "/timelapse.mp4",
-    poster: "/story/timelapse-poster.jpg",
+    poster: timelapsePoster,
     caption: "Our team learning kotekan at Mekar Bhuana, the way everyone does: by ear, on the floor, beside a teacher.",
   },
   gaps: [
     {
-      title: "Taught only at rehearsal.",
-      body: "Between sessions, there’s no one to learn from.",
+      title: "Learned only at rehearsal",
+      body: "Once the session ends, so does the lesson.",
     },
     {
-      title: "Nothing written down.",
-      body: "Kotekan lives in the instructor’s memory.",
+      title: "Never played alone",
+      body: "Without your partner, the song falls apart.",
     },
     {
-      title: "Kotekan needs two.",
-      body: "Alone, you can only practise half.",
+      title: "Nothing written down",
+      body: "No sheet, no recording, only the instructor.",
     },
   ],
   turn: {
-    title: "A full gamelan set, and no one to teach it.",
-    body: "That’s what we found at one school. Without practice between rehearsals, students fall behind, and some let go of gamelan.",
+    title: "When the lesson stops, motivation goes with it",
+    body: "At one school we found a full gamelan set with no one to teach it. Without practice between rehearsals, students fall behind, and some let go of gamelan.",
   },
 } as const;
 
@@ -112,44 +118,49 @@ export const complement = {
  */
 export const designed = {
   title: "Made for gamelan",
+  description: "Four pillars that spell GONG, the stroke that completes every cycle.",
   features: [
     {
       id: "play",
-      title: "Play along",
+      title: "Groove",
+      plain: "Play along",
       body: "The other half, in your gangsa’s own voice. A waterfall and a damp cue make practising alone feel like playing with a partner.",
       video: "/captures/play.mp4",
-      poster: "/captures/play.jpg",
+      poster: playPoster,
       label: "The play screen: notes fall onto the gangsa, and each strike is called out as it lands.",
     },
     {
       id: "yours",
-      title: "Make it yours",
+      title: "Own",
+      plain: "Make it yours",
       body: "Kotek Studio. Every instructor records their own kotekan and shares it with their students.",
       video: "/captures/studio.mp4",
-      poster: "/captures/studio.jpg",
+      poster: studioPoster,
       label: "Opening a kotekan from the list in Kotek Studio, adding polos and sangsih strokes, and playing it back.",
     },
     {
       id: "progress",
-      title: "See your progress",
+      title: "Notice",
+      plain: "See your progress",
       body: "Sensors on the gangsa feel every real strike. Precise feedback turns each practice into progress you can see.",
       video: "/captures/feedback.mp4",
-      poster: "/captures/feedback.jpg",
+      poster: feedbackPoster,
       label: "A session’s result, then Where to polish, with Kipli explaining the strokes that slipped.",
       explainer: true,
     },
     {
       id: "alive",
-      title: "Keep it alive",
+      title: "Guard",
+      plain: "Keep it alive",
       body: "Every kotekan recorded is kept in its sanggar’s own sound, for the next generation.",
       video: "/captures/voice.mp4",
-      poster: "/captures/voice.jpg",
+      poster: voicePoster,
       label: "Adding a gangsa: recording each bilah’s own sound, one key at a time.",
     },
   ],
 } as const;
 
-/** The popup behind "See your progress". */
+/** The popup behind Notice. */
 export const sensors = {
   cta: "See how the sensors work",
   title: "How the sensors work",

@@ -14,7 +14,7 @@ export function ClosingCta() {
         alt=""
         width={540}
         height={538}
-        className="pointer-events-none absolute top-1/2 left-1/2 w-[34rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-40"
+        className="rose-turn pointer-events-none absolute top-1/2 left-1/2 w-[34rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-40"
       />
       <Container className="relative">
         <Reveal stagger className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">

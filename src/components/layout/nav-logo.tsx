@@ -103,7 +103,7 @@ export function NavLogo() {
         alt=""
         width={36}
         height={36}
-        className="size-9 will-change-transform select-none pointer-events-none"
+        className="size-9 object-contain will-change-transform select-none pointer-events-none"
         preload
       />
     </div>

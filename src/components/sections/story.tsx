@@ -27,8 +27,8 @@ function RehearsalWeek() {
 
 const gapVisuals = [
   <RehearsalWeek key="week" />,
-  <MiniRoll key="unwritten" polos="ghost" sangsih="ghost" />,
   <MiniRoll key="half" sangsih="sangsih-ghost" />,
+  <MiniRoll key="unwritten" polos="ghost" sangsih="ghost" />,
 ];
 
 export function StorySection() {
@@ -36,19 +36,19 @@ export function StorySection() {
     <Section id="story">
       <Container>
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
-          <Reveal stagger className="flex flex-col items-start gap-5">
+          <Reveal stagger className="flex flex-col items-start gap-[1.1875rem]">
             <Eyebrow>{story.eyebrow}</Eyebrow>
-            <h2 className="text-[4.25rem] leading-[0.86] text-balance md:text-[6.5rem]">
+            <h2 className="text-[3.5rem] leading-[0.92] text-balance md:text-[4.375rem]">
               {story.title}
             </h2>
-            <p className="text-xl text-pretty text-foreground">{story.lead}</p>
+            <p className="text-lg leading-snug text-pretty">{story.lead}</p>
+            <p className="text-lg leading-snug text-pretty">{story.taught}</p>
             <blockquote
               lang="ban"
-              className="border-l-4 border-kuning pl-4 font-display text-[2.5rem] leading-none text-foreground"
+              className="border-l-4 border-kuning pl-4 font-display text-[1.875rem] leading-[1.1] text-foreground"
             >
               {story.proverb}
             </blockquote>
-            <p className="text-lg leading-relaxed text-pretty">{story.body}</p>
           </Reveal>
 
           <Reveal>
@@ -57,7 +57,8 @@ export function StorySection() {
                 src={story.video.src}
                 poster={story.video.poster}
                 label={story.video.caption}
-                className="aspect-video w-full rounded-card bg-krem object-cover"
+                sizes="(min-width: 1024px) 34rem, 100vw"
+                className="aspect-video w-full rounded-card bg-krem"
               />
               <figcaption className="text-sm text-pretty text-muted-foreground">
                 {story.video.caption}
