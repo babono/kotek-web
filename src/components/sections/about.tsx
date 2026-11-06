@@ -11,7 +11,7 @@ export function AboutSection() {
       <Container className="grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
         <Reveal stagger className="flex flex-col items-start gap-4">
           <Eyebrow>{about.eyebrow}</Eyebrow>
-          <h2 className="text-[3.5rem] leading-[0.9] text-balance md:text-[4.5rem]">
+          <h2 className="text-heading leading-[0.9] text-balance md:text-[4.5rem]">
             {about.title}
           </h2>
           <p className="text-lg text-pretty">{about.intro}</p>

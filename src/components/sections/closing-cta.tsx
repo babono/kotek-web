@@ -6,6 +6,8 @@ import { Section } from "@/components/ui/section";
 import { closingCta } from "@/content/landing";
 
 export function ClosingCta() {
+  // "ber-gangsa" stays whole: browsers will otherwise break it at the hyphen.
+  const [lead, word] = closingCta.title.split(" ");
   return (
     <Section id="download" className="relative overflow-hidden">
       {/* The turning nawa sanga rose from the app's splash. */}
@@ -18,8 +20,8 @@ export function ClosingCta() {
       />
       <Container className="relative">
         <Reveal stagger className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
-          <h2 lang="ban" className="text-8xl leading-[0.9] md:text-[9rem]">
-            {closingCta.title}
+          <h2 lang="ban" className="text-closing leading-[0.9] md:text-[9rem]">
+            {lead} <span className="whitespace-nowrap">{word}</span>
           </h2>
           <p className="text-lg">{closingCta.description}</p>
           <AppStoreButton variant="primary" className="mt-2" />

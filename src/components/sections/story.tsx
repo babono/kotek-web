@@ -38,14 +38,14 @@ export function StorySection() {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
           <Reveal stagger className="flex flex-col items-start gap-[1.1875rem]">
             <Eyebrow>{story.eyebrow}</Eyebrow>
-            <h2 className="text-[3.5rem] leading-[0.92] text-balance md:text-[4.375rem]">
+            <h2 className="text-heading leading-[0.92] text-balance md:text-[4.375rem]">
               {story.title}
             </h2>
             <p className="text-lg leading-snug text-pretty">{story.lead}</p>
             <p className="text-lg leading-snug text-pretty">{story.taught}</p>
             <blockquote
               lang="ban"
-              className="border-l-4 border-kuning pl-4 font-display text-[1.875rem] leading-[1.1] text-foreground"
+              className="border-l-4 border-kuning pl-4 font-display text-[1.875rem] leading-[1.1] text-balance text-foreground"
             >
               {story.proverb}
             </blockquote>
@@ -75,7 +75,7 @@ export function StorySection() {
             >
               {gapVisuals[i]}
               <div>
-                <h3 className="text-[2.25rem] leading-none">{gap.title}</h3>
+                <h3 className="text-[2rem] leading-none md:text-[2.25rem]">{gap.title}</h3>
                 <p className="mt-1 text-[1.0625rem] text-pretty">{gap.body}</p>
               </div>
             </article>
@@ -87,7 +87,7 @@ export function StorySection() {
           className="mx-auto mt-20 flex max-w-4xl flex-col items-center gap-5 text-center md:mt-24"
         >
           <Image src="/art/kipli-sad.svg" alt="" width={84} height={72} className="h-[4.5rem] w-auto" />
-          <p className="font-display text-[3.5rem] leading-[0.9] text-balance text-foreground md:text-[5rem]">
+          <p className="font-display text-heading leading-[0.92] text-balance text-foreground md:text-[5rem]">
             {story.turn.title}
           </p>
           <p className="max-w-2xl text-lg leading-relaxed text-pretty">

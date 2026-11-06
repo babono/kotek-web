@@ -27,7 +27,7 @@ export function SectionHeading({
       )}
     >
       {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
-      <Heading className="text-6xl leading-[0.88] text-balance sm:text-7xl md:text-[5.5rem]">
+      <Heading className="text-heading leading-[0.9] text-balance sm:text-7xl md:text-[5.5rem]">
         {title}
       </Heading>
       {description ? (

@@ -27,7 +27,7 @@ export function LegalPage({
       <Container className="max-w-3xl">
         <header className="flex flex-col items-start gap-4">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h1 className="text-6xl leading-[0.9] text-balance sm:text-7xl">
+          <h1 className="text-heading leading-[0.9] text-balance sm:text-7xl">
             {title}
           </h1>
           <p className="text-sm text-subtle-foreground">Last updated {updated}</p>

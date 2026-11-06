@@ -23,7 +23,7 @@ export function DesignedSection() {
             <Reveal key={feature.id}>
               <article
                 className={cn(
-                  "grid items-center gap-8 overflow-hidden rounded-[1.75rem] p-6 sm:p-8 lg:gap-12 lg:p-12",
+                  "grid items-center gap-6 overflow-hidden rounded-[1.75rem] px-4 pt-6 pb-4 sm:gap-8 sm:p-8 lg:gap-12 lg:p-12",
                   i % 2 === 0
                     ? "bg-krem lg:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)]"
                     : "bg-kayu/45 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)]",
@@ -32,7 +32,7 @@ export function DesignedSection() {
                 <div className={cn(i % 2 === 1 && "lg:order-2")}>
                   <Eyebrow>{feature.plain}</Eyebrow>
                   {/* The first letters spell GONG, down the section. */}
-                  <h3 className="mt-2 text-[3.5rem] leading-[0.9] md:text-[4.25rem]">
+                  <h3 className="mt-2 text-subheading leading-[0.9] md:text-[4.25rem]">
                     <span className="text-merah">{feature.title[0]}</span>
                     {feature.title.slice(1)}
                   </h3>

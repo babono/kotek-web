@@ -21,7 +21,7 @@ export function ContributeSection() {
                 <p className="text-xs font-semibold tracking-[0.2em] text-muted-foreground uppercase">
                   {way.who}
                 </p>
-                <h3 className="mt-3 text-[2.5rem] leading-[0.95] text-balance">
+                <h3 className="mt-3 text-[2.125rem] leading-[0.95] md:text-[2.5rem] text-balance">
                   {way.what}
                 </h3>
               </div>

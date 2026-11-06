@@ -114,7 +114,7 @@ export function KotekanGuide({ word }: { word: string }) {
         <div className="flex flex-col gap-4">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 id="kotekan-guide-title" className="text-[2.75rem] leading-none">
+              <h2 id="kotekan-guide-title" className="text-[2.25rem] leading-none sm:text-[2.75rem]">
                 {interlock.title}
               </h2>
               <p className="mt-1 text-[1.0625rem] text-pretty">{interlock.definition}</p>
