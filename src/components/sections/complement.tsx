@@ -11,7 +11,7 @@ export function ComplementSection() {
           stagger
           className="mx-auto flex max-w-4xl flex-col items-center gap-5 text-center"
         >
-          <h2 className="text-[4.25rem] leading-[0.88] text-balance text-putih md:text-[7rem]">
+          <h2 className="text-hero leading-[0.9] text-balance text-putih md:text-[7rem]">
             {complement.title.before}{" "}
             <span className="text-kuning">{complement.title.not}</span>{" "}
             {complement.title.after}

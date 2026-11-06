@@ -12,7 +12,7 @@ export function FaqSection() {
           stagger
           className="flex flex-col gap-4 md:sticky md:top-28 md:self-start"
         >
-          <h2 className="text-6xl leading-[0.88] text-balance sm:text-7xl">
+          <h2 className="text-heading leading-[0.9] text-balance sm:text-7xl">
             Everything you need to know
           </h2>
         </Reveal>

@@ -43,7 +43,7 @@ export function ImpactSection() {
 
         <Reveal stagger className="mt-16 flex flex-col items-center gap-3 text-center md:mt-24">
           <Eyebrow>{market.eyebrow}</Eyebrow>
-          <h3 className="max-w-3xl text-[3.5rem] leading-[0.88] text-balance md:text-[4.75rem]">
+          <h3 className="max-w-3xl text-subheading leading-[0.9] text-balance md:text-[4.75rem]">
             {market.title}
           </h3>
         </Reveal>

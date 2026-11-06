@@ -21,7 +21,7 @@ export function RealGangsaSection() {
         </Reveal>
         <Reveal stagger className="flex flex-col items-start gap-[1.125rem]">
           <Eyebrow>{realGangsa.eyebrow}</Eyebrow>
-          <h2 className="text-[3.25rem] leading-[0.95] text-balance md:text-[4.125rem]">
+          <h2 className="text-heading leading-[0.95] text-balance md:text-[4.125rem]">
             {realGangsa.title}
           </h2>
           <p className="text-lg leading-snug text-pretty">{realGangsa.body}</p>

@@ -59,7 +59,7 @@ export function SensorExplainer() {
         {open ? (
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between gap-4">
-              <h2 id="sensors-title" className="text-[2.75rem] leading-none">
+              <h2 id="sensors-title" className="text-[2.25rem] leading-none sm:text-[2.75rem]">
                 {sensors.title}
               </h2>
               <button

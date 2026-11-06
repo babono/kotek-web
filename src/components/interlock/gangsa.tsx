@@ -154,7 +154,7 @@ export function Gangsa() {
   return (
     <div
       ref={stage}
-      className="relative z-10 mx-auto mt-14 w-[max(100%,30rem)] max-w-[52rem] self-center [@media(max-height:800px)]:mt-10"
+      className="relative z-10 mx-auto mt-14 w-[calc(100%-2.5rem)] max-w-[52rem] sm:w-full self-center [@media(max-height:800px)]:mt-10"
       aria-hidden
     >
       <img src="/art/gangsa-table.svg" alt="" className="block w-full" />

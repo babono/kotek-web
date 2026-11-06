@@ -59,14 +59,14 @@ export function Hero() {
           stagger
           className="flex max-w-[56rem] flex-col items-center gap-5 text-center"
         >
-          <h1 className="text-[4.25rem] leading-[0.84] text-balance sm:text-7xl md:text-[5.5rem] lg:text-[6.25rem] [@media(max-height:800px)]:lg:text-[5rem]">
+          <h1 className="text-hero leading-[0.88] text-balance sm:text-[4rem] md:text-[5.5rem] lg:text-[6.25rem] [@media(max-height:800px)]:lg:text-[5rem]">
             <KotekanGuide word={hero.title.word} />{" "}
             {hero.title.rest}
           </h1>
           <p className="max-w-xl text-lg leading-snug text-pretty text-body sm:text-[1.3125rem]">
             {hero.description}
           </p>
-          <div className="mt-2 flex flex-col items-center gap-3 sm:flex-row">
+          <div className="mt-2 flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
             <ButtonLink href={hero.primaryCta.href}>
               {hero.primaryCta.label}
             </ButtonLink>

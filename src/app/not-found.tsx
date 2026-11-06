@@ -7,7 +7,7 @@ export default function NotFound() {
     <main className="flex flex-1 items-center">
       <Container className="flex flex-col items-center gap-5 py-32 text-center">
         <Image src="/art/kipli-sad.svg" alt="" width={84} height={72} className="h-20 w-auto" />
-        <h1 className="text-6xl leading-[0.9] text-balance sm:text-7xl">
+        <h1 className="text-heading leading-[0.9] text-balance sm:text-7xl">
           We couldn&rsquo;t find that page
         </h1>
         <p className="max-w-md text-muted-foreground text-pretty">
