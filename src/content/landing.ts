@@ -14,9 +14,9 @@ import timelapsePoster from "../../public/story/timelapse-poster.jpg";
 
 export const hero = {
   /** Split because the word itself opens the explanation of kotekan. */
-  title: { word: "Kotekan", rest: "was never meant to be played alone" },
+  title: { word: "Kotekan", rest: ", taught beyond the rehearsal" },
   description:
-    "Kotek plays the other half on your own gangsa, so practice doesn’t stop when rehearsal ends.",
+    "Kotek carries a teacher’s kotekan to every student’s own gangsa. Groove with the other half, own your kotekan, notice every strike, and guard your sanggar’s sound for the next generation.",
   primaryCta: { href: "#get-involved", label: "Get involved" },
 } as const;
 

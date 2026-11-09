@@ -25,7 +25,7 @@ export function SiteFooter() {
             />
             <KotekSanskrit className="h-6 w-auto text-kuning" />
           </Link>
-          <p className="max-w-xs leading-relaxed">{siteConfig.tagline}.</p>
+          <p className="max-w-xs leading-relaxed">{siteConfig.footerLine}</p>
         </div>
 
         {footerGroups.map((group) => (

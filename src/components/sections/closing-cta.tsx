@@ -10,14 +10,17 @@ export function ClosingCta() {
   const [lead, word] = closingCta.title.split(" ");
   return (
     <Section id="download" className="relative overflow-hidden">
-      {/* The turning nawa sanga rose from the app's splash. */}
-      <Image
-        src="/art/nawasanga.svg"
-        alt=""
-        width={540}
-        height={538}
-        className="rose-turn pointer-events-none absolute top-1/2 left-1/2 w-[34rem] max-w-none -translate-x-1/2 -translate-y-1/2 opacity-40"
-      />
+      {/* The turning nawa sanga rose from the app's splash, kept inside the
+          section on both axes because it turns: nothing may clip it. */}
+      <div className="pointer-events-none absolute inset-3 flex items-center justify-center">
+        <Image
+          src="/art/nawasanga.svg"
+          alt=""
+          width={540}
+          height={538}
+          className="rose-turn size-[34rem] max-h-full max-w-full object-contain opacity-40"
+        />
+      </div>
       <Container className="relative">
         <Reveal stagger className="mx-auto flex max-w-2xl flex-col items-center gap-4 text-center">
           <h2 lang="ban" className="text-closing leading-[0.9] md:text-[9rem]">
