@@ -137,7 +137,7 @@ export const designed = {
       id: "progress",
       title: "Notice",
       plain: "See your progress",
-      body: "Sensors on the gangsa feel every real strike. Precise feedback turns each practice into progress you can see.",
+      body: "Sensors on the gangsa feel every real strike. Kotek shows where in the cycle you slip, and on-device AI suggests how to practise that part.",
       video: "/captures/feedback.mp4",
       poster: feedbackPoster,
       label: "A session’s result, then Where to polish, with Kipli explaining the strokes that slipped.",
