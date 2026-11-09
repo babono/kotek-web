@@ -60,8 +60,7 @@ export function Hero() {
           className="flex max-w-[56rem] flex-col items-center gap-5 text-center"
         >
           <h1 className="text-hero leading-[0.88] text-balance sm:text-[4rem] md:text-[5.5rem] lg:text-[6.25rem] [@media(max-height:800px)]:lg:text-[5rem]">
-            {/* `rest` carries its own punctuation and space after the word. */}
-            <KotekanGuide word={hero.title.word} />
+            {hero.title.before} <KotekanGuide word={hero.title.word} />{" "}
             {hero.title.rest}
           </h1>
           <p className="max-w-xl text-lg leading-snug text-pretty text-body sm:text-[1.3125rem]">

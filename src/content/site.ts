@@ -1,10 +1,10 @@
 export const siteConfig = {
   name: "Kotek",
-  tagline: "Kotekan, taught beyond the rehearsal",
+  tagline: "Practise kotekan every day, not just at rehearsal",
   /** The footer’s closing line, the same as the pitch’s. */
   footerLine: "Practise more. Play better. Pass it on.",
   description:
-    "Kotek carries a teacher’s kotekan to every student’s own gangsa. Groove with the other half, own your kotekan, notice every strike, and guard your sanggar’s sound for the next generation.",
+    "Kotek helps gamelan students keep practising on their own gangsa, with the other half played back and every strike checked.",
   /** App Store listing. */
   appStoreUrl: "https://apps.apple.com/app/kotek/id6803080731",
   email: "hello@kotek.app",
