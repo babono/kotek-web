@@ -5,7 +5,7 @@ export function GET() {
     applinks: {
       details: [
         {
-          appIDs: ["235Y6894DR.com.dimas.gomelan"],
+          appIDs: ["235Y6894DR.com.dimas.gomelan", "U96VKD93X4.me.babono.kotek"],
           components: [{ "/": "/share/*" }],
         },
       ],
