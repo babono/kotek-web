@@ -67,7 +67,34 @@ export function StorySection() {
           </Reveal>
         </div>
 
-        <Reveal stagger className="mt-14 grid gap-4 md:mt-20 md:grid-cols-3">
+        <Reveal
+          stagger
+          className="mx-auto mt-16 flex max-w-3xl flex-col items-center gap-3 text-center md:mt-24"
+        >
+          <h3 className="text-subheading leading-[0.95] text-balance md:text-[3.5rem]">
+            <span className="text-merah">{story.bridge.turnWord}</span>{" "}
+            {story.bridge.title}
+          </h3>
+          <p className="text-lg leading-relaxed text-pretty">{story.bridge.body}</p>
+          <p className="text-sm text-pretty text-muted-foreground">
+            {story.bridge.sourcesLabel}:{" "}
+            {story.bridge.sources.map((source, i) => (
+              <span key={source.href}>
+                {i > 0 ? " · " : null}
+                <a
+                  href={source.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 hover:text-foreground focus-visible:outline-2 focus-visible:outline-ring"
+                >
+                  {source.label}
+                </a>
+              </span>
+            ))}
+          </p>
+        </Reveal>
+
+        <Reveal stagger className="mt-10 grid gap-4 md:mt-12 md:grid-cols-3">
           {story.gaps.map((gap, i) => (
             <article
               key={gap.title}

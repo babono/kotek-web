@@ -14,7 +14,12 @@ export function DesignedSection() {
       <Container>
         <SectionHeading
           eyebrow={designed.eyebrow}
-          title={designed.title}
+          title={
+            <>
+              {designed.title.before}{" "}
+              <span className="text-merah">{designed.title.accent}</span>
+            </>
+          }
           description={designed.description}
         />
 

@@ -14,9 +14,9 @@ import timelapsePoster from "../../public/story/timelapse-poster.jpg";
 
 export const hero = {
   /** Split because the word itself opens the explanation of kotekan. */
-  title: { word: "Kotekan", rest: "was never meant to be played alone" },
+  title: { before: "Practise", word: "kotekan", rest: "every day, not just at rehearsal" },
   description:
-    "Kotek plays the other half on your own gangsa, so practice doesn’t stop when rehearsal ends.",
+    "Kotek helps gamelan students keep practising on their own gangsa, with the other half played back and every strike checked.",
   primaryCta: { href: "#get-involved", label: "Get involved" },
 } as const;
 
@@ -55,14 +55,29 @@ export type InterlockCard = (typeof interlock.cards)[number]["id"];
 
 export const story = {
   eyebrow: "The story",
-  title: "Bali keeps its gamelan in people, not pages",
-  lead: "Bali is an island rich in culture, and gamelan lives in its everyday life. Children learn it from an early age, at school and in the banjar.",
+  title: "Gamelan lives in Bali’s everyday life",
+  lead: "In 2021, UNESCO recognised gamelan as Intangible Cultural Heritage of Humanity. Children in Bali learn it from an early age, at school and in the banjar.",
   taught: "It’s taught by an instructor, mostly by ear and by watching the mallet.",
   proverb: "Meguru kuping, meguru panggul.",
   video: {
     src: "/timelapse.mp4",
     poster: timelapsePoster,
     caption: "Our team learning kotekan at Mekar Bhuana, the way everyone does: by ear, on the floor, beside a teacher.",
+  },
+  /** The turn from how gamelan is taught to what that leaves out. */
+  bridge: {
+    /** "But" is set in Merah: it is where the story turns. */
+    turnWord: "But",
+    title: "there aren’t enough instructors",
+    body: "In 2023, Bali was short of about 1,700 teachers, with arts and culture among the biggest gaps. When learning depends on the instructor, every gap shows:",
+    sourcesLabel: "Sources",
+    sources: [
+      { label: "UNESCO (2021)", href: "https://ich.unesco.org/en/decisions/16.COM/8.B.16" },
+      {
+        label: "ANTARA Bali (2023)",
+        href: "https://bali.antaranews.com/berita/323391/gubernur-koster-kurangnya-guru-di-bali-karena-terus-bangun-sekolah",
+      },
+    ],
   },
   gaps: [
     {
@@ -96,7 +111,7 @@ export const complement = {
  */
 export const designed = {
   eyebrow: "How Kotek works",
-  title: "Four pillars, one GONG",
+  title: { before: "Four pillars, one", accent: "GONG" },
   description:
     "Groove with the other half, own your kotekan, notice every strike, and guard your sanggar’s sound.",
   features: [
@@ -122,7 +137,7 @@ export const designed = {
       id: "progress",
       title: "Notice",
       plain: "See your progress",
-      body: "Sensors on the gangsa feel every real strike. Precise feedback turns each practice into progress you can see.",
+      body: "Sensors on the gangsa feel every real strike. Kotek shows where in the cycle you slip, and on-device AI suggests how to practise that part.",
       video: "/captures/feedback.mp4",
       poster: feedbackPoster,
       label: "A session’s result, then Where to polish, with Kipli explaining the strokes that slipped.",
