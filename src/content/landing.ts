@@ -299,7 +299,7 @@ export const impact = {
     stats: [
       {
         icon: "school",
-        value: "3,012",
+        value: "2,824",
         label: "primary and junior high schools in Bali",
       },
       {
@@ -322,8 +322,8 @@ export const impact = {
     sourcesLabel: "Sources",
     sources: [
       {
-        label: "Kemendikdasmen",
-        href: "https://referensi.data.kemendikdasmen.go.id/pendidikan/dikdas",
+        label: "Dapodik (2026)",
+        href: "https://dapo.kemendikdasmen.go.id/sp",
       },
       {
         label: "Dinas PMA Bali, via BRIDA Badung",
@@ -347,12 +347,7 @@ export const impact = {
     {
       state: "live",
       label: "On the App Store",
-      body: "Kotek v1.",
-    },
-    {
-      state: "building",
-      label: "In development",
-      body: "v2, with sensors and Kotek Studio.",
+      body: "Kotek v2, with sensors and Kotek Studio.",
     },
     {
       state: "building",
