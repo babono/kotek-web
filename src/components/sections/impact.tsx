@@ -20,7 +20,7 @@ export function ImpactSection() {
           <PlaceMap />
         </Reveal>
 
-        <Reveal stagger className="mt-8 grid gap-3 md:grid-cols-3">
+        <Reveal stagger className="mt-8 grid gap-3 md:grid-cols-2">
           {impact.status.map((item) => (
             <div key={item.label} className="flex gap-3 p-2">
               {/* The app's status dots: Pandan is all good, Kuning is on its way. */}
