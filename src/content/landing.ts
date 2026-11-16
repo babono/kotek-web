@@ -15,9 +15,43 @@ import timelapsePoster from "../../public/story/timelapse-poster.jpg";
 export const hero = {
   /** Split because the word itself opens the explanation of kotekan. */
   title: { before: "Practise", word: "kotekan", rest: "every day, not just at rehearsal" },
-  description:
-    "Kotek helps gamelan students keep practising on their own gangsa, with the other half played back and every strike checked.",
+  /** Split the same way: "gangsa" opens the guide to the instrument. */
+  description: {
+    before: "Kotek helps gamelan students keep practising on their own",
+    word: "gangsa",
+    rest: ", with the other half played back and every strike checked.",
+  },
   primaryCta: { href: "#get-involved", label: "Get involved" },
+} as const;
+
+/** What a gangsa is, and where it sits in the gamelan. */
+export const gangsaGuide = {
+  title: "What is a gangsa?",
+  definition:
+    "A Balinese metallophone: ten bronze keys, called bilah, over bamboo resonators in a carved wooden frame. One hand strikes with a mallet while the other damps the note just played.",
+  kipli: "Gamelan is a whole orchestra. Kotek is made for the gangsa, where kotekan is played.",
+  ensemble: "Gamelan gong kebyar",
+  ensembleNote: "Bali’s most widely played ensemble, about 25 players.",
+  family: "Gangsa family",
+  close: "Got it",
+  hint: "Hover or tap an instrument to see its part.",
+  /** What each group plays, shown as you point at it. */
+  parts: {
+    ugal: { name: "Ugal", count: "1 player", gloss: "Leads the gangsa and plays the melody." },
+    pemade: { name: "Pemadé", count: "4 players", gloss: "Plays kotekan in the middle range." },
+    kantilan: { name: "Kantilan", count: "4 players", gloss: "Plays the same kotekan, an octave higher." },
+    jegogan: { name: "Jegogan", count: "2 players", gloss: "Plays the core melody, slow and low." },
+    calung: { name: "Calung", count: "2 players", gloss: "Plays the core melody, twice as fast." },
+    gong: {
+      name: "Gong and kempur",
+      gloss: "The gong marks the start and end of every cycle. The kempur marks the points in between.",
+    },
+    trompong: { name: "Trompong", count: "1 player", gloss: "A solo lead that opens some pieces." },
+    reyong: { name: "Reyong", count: "4 players", gloss: "Adds accents and interlocking parts." },
+    kendang: { name: "Kendang", count: "2 players", gloss: "Leads the tempo and cues every change." },
+    cengceng: { name: "Ceng-ceng", gloss: "Cymbals that drive the rhythm." },
+    suling: { name: "Suling", gloss: "Flutes floating a long melody above." },
+  },
 } as const;
 
 /** The app's "How kotekan works" guide, in its own words. */

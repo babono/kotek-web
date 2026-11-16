@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element -- decorative SVGs */
 import { Gangsa } from "@/components/interlock/gangsa";
+import { GangsaGuide } from "@/components/interlock/gangsa-guide";
 import { KotekanGuide } from "@/components/interlock/kotekan-guide";
 import { AppStoreButton } from "@/components/ui/app-store-button";
 import { ButtonLink } from "@/components/ui/button";
@@ -64,7 +65,8 @@ export function Hero() {
             {hero.title.rest}
           </h1>
           <p className="max-w-xl text-lg leading-snug text-pretty text-body sm:text-[1.3125rem]">
-            {hero.description}
+            {hero.description.before} <GangsaGuide word={hero.description.word} />
+            {hero.description.rest}
           </p>
           <div className="mt-2 flex w-full max-w-sm flex-col gap-3 sm:w-auto sm:max-w-none sm:flex-row sm:items-center">
             <ButtonLink href={hero.primaryCta.href}>
