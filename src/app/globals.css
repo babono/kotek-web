@@ -108,6 +108,11 @@
     color-scheme: light;
   }
 
+  /* The page holds still under an open popup, touch scrolling included. */
+  html:has(dialog[open]:modal) {
+    overflow: hidden;
+  }
+
   /* Fallback for when Lenis is not running (no JS). Lenis adds `.lenis`. */
   html:not(.lenis) {
     scroll-behavior: smooth;

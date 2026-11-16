@@ -89,7 +89,7 @@ export function KotekanGuide({ word }: { word: string }) {
           flushSync(() => setOpened(true));
           dialog.current?.showModal();
         }}
-        className="cursor-pointer rounded-sm underline decoration-kuning decoration-[0.07em] underline-offset-[0.14em] transition-colors hover:decoration-merah focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+        className="cursor-pointer rounded-sm underline [text-decoration-skip-ink:none] decoration-kuning decoration-[0.07em] underline-offset-[0.14em] transition-colors hover:decoration-merah focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
       >
         {word}
       </button>

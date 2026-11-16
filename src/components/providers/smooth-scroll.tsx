@@ -29,7 +29,18 @@ export function SmoothScroll() {
       respectReducedMotion: true,
     });
 
-    return () => lenis.destroy();
+    // Hold the page still while any popup is open, and let it go after.
+    const lock = () => {
+      if (document.querySelector("dialog[open]:modal")) lenis.stop();
+      else lenis.start();
+    };
+    const popups = new MutationObserver(lock);
+    popups.observe(document.body, { subtree: true, attributeFilter: ["open"] });
+
+    return () => {
+      popups.disconnect();
+      lenis.destroy();
+    };
   }, []);
 
   return null;
