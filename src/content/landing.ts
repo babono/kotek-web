@@ -28,8 +28,8 @@ export const hero = {
 export const gangsaGuide = {
   title: "What is a gangsa?",
   definition:
-    "A Balinese metallophone: ten bronze keys, called bilah, over bamboo resonators in a carved wooden frame. One hand strikes with a mallet while the other damps the note just played.",
-  kipli: "Gamelan is a whole orchestra. Kotek is made for the gangsa, where kotekan is played.",
+    "Gamelan isn’t one instrument. It’s a whole ensemble of bronze keys, gongs, drums and flutes. The gangsa is one family within it: metallophones with ten bronze keys (bilah) over bamboo resonators, carrying the melody and the fast interlocking parts around it.",
+  kipli: "One hand strikes, the other damps the note just played. That’s the gangsa, and it’s where kotekan lives.",
   ensemble: "Gamelan gong kebyar",
   ensembleNote: "Bali’s most widely played ensemble, about 25 players.",
   family: "Gangsa family",
