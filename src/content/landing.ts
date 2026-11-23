@@ -119,7 +119,7 @@ export const story = {
       body: "Once the session ends, so does the lesson.",
     },
     {
-      title: "Never played alone",
+      title: "Always played in pairs",
       body: "Without your partner, the song falls apart.",
     },
     {
