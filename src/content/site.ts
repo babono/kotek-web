@@ -35,6 +35,7 @@ export const footerGroups = [
       { href: "/#get-involved", label: "Get involved" },
       { href: "/feedback", label: "Feedback wall" },
       { href: "/spin", label: "Prize wheel" },
+      { href: "/photobooth", label: "Photobooth" },
     ],
   },
   {

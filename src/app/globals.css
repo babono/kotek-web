@@ -509,6 +509,39 @@
   animation: pop-backdrop 0.28s ease-out;
 }
 
+/* The photobooth: each number of the countdown lands, then the flash. */
+@keyframes booth-count {
+  from {
+    opacity: 0;
+    transform: scale(1.6);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0.85;
+    transform: scale(0.94);
+  }
+}
+
+@keyframes booth-flash {
+  from {
+    opacity: 0.95;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.booth-count {
+  animation: booth-count 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.booth-flash {
+  animation: booth-flash 0.45s ease-out both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
